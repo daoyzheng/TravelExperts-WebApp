@@ -261,6 +261,16 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Workshop5.TravelExperts.Data\Workshop5.TravelExperts.Data.csproj">
+      <Project>{43e53284-c039-48c9-9d90-adc31d9e1c61}</Project>
+      <Name>Workshop5.TravelExperts.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Workshop5.TravelExperts.Domain\Workshop5.TravelExperts.Domain.csproj">
+      <Project>{c91faaea-f1d9-42e3-8d3a-7aafb1011cbb}</Project>
+      <Name>Workshop5.TravelExperts.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
