@@ -41,8 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CustomerDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TravelExpertsDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Workshop5.TravelExperts.Data\Workshop5.TravelExperts.Data.csproj">
