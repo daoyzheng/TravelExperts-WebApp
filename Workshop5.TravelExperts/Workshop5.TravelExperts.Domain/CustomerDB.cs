@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -67,9 +68,6 @@ namespace Workshop5.TravelExperts.Domain
         }//end of AddCustomer class
 
 
-
-
-
         //function to check username to make sure it is uniqe
         public static bool CheckUserName(string username)
         {
@@ -109,6 +107,40 @@ namespace Workshop5.TravelExperts.Domain
 
 
         }//end of heckUserName function
+
+
+        //function to find customerid through the username for login the existing customer
+        public static int Find(string userName)
+        {
+            int custID = 0;
+            SqlConnection con = TravelExpertsDB.GetConnection();
+            string findStatement = "select CustomerId from Customers where (UserName=@UserName)";
+            SqlCommand cmd = new SqlCommand(findStatement, con);
+
+            cmd.Parameters.AddWithValue("@UserName", userName);
+
+            try
+            {
+                con.Open();
+                //read the row of customer information to get customer id
+                SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
+                if (reader.Read())
+
+                    custID = Convert.ToInt32(reader["CustomerId"]);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            return custID;
+
+        }//end of Find function
+
+
 
     }// end of CustomerDBclass
 }//end of namespace

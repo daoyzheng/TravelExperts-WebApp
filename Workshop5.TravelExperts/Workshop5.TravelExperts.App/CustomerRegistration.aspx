@@ -1,4 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CustomerRegistration.aspx.cs" Inherits="Workshop5.TravelExperts.App.CustomerRegistration" %>
+<%--/*
+    * Term 2 Threaded Project 
+    * Author : Mahda Kazemian
+    * Date : April 03,2019
+    * Course Name : Threaded Project for OOSD
+    * Module : PROJ-207-OOSD
+    * Purpose :registration page
+    */--%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
