@@ -17,7 +17,6 @@ namespace Workshop5.TravelExperts.Data
 
     public class Customer
     {
-
         public int CustomerId { get; set; }
         public string CustFirstName { get; set; }
         public string CustLastName { get; set; }
@@ -29,7 +28,7 @@ namespace Workshop5.TravelExperts.Data
         public string CustHomePhone { get; set; }
         public string CustBusPhone { get; set; }
         public string CustEmail { get; set; }
-        public int? AgentId { get; set; }
+        //public int AgentId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
 
