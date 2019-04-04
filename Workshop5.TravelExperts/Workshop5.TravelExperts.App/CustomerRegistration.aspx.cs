@@ -25,33 +25,39 @@ namespace Workshop5.TravelExperts.App {
         //submit button to insert(register) new customer information
         protected void uxSubmit_Click(object sender, EventArgs e)
         {
-            var cust = new Customer
+            string un = Convert.ToString(uxUsername.Text);
+            if (CustomerDB.CheckUserName(un))
             {
-                UserName = uxUsername.Text,
-                Password = uxPassword.Text,
-                CustFirstName = uxFirstName.Text,
-                CustLastName = uxLastName.Text,
-                CustAddress = uxAddress.Text,
-                CustCity = uxCity.Text,
-                CustProv = DropDownList1.Text,
-                CustPostal = uxPostal.Text,
-                CustCountry = uxCountry.Text,
-                CustHomePhone = uxHomePhone.Text,
-                CustBusPhone = uxBusPhone.Text,
-                CustEmail = uxEmail.Text
-              // AgentId = Convert.ToInt32(uxAgentId.Text)
-            };
+                var cust = new Customer
+                {
+                    UserName = uxUsername.Text,
+                    Password = uxPassword.Text,
+                    CustFirstName = uxFirstName.Text,
+                    CustLastName = uxLastName.Text,
+                    CustAddress = uxAddress.Text,
+                    CustCity = uxCity.Text,
+                    CustProv = DropDownList1.Text,
+                    CustPostal = uxPostal.Text,
+                    CustCountry = uxCountry.Text,
+                    CustHomePhone = uxHomePhone.Text,
+                    CustBusPhone = uxBusPhone.Text,
+                    CustEmail = uxEmail.Text
+                    // AgentId = Convert.ToInt32(uxAgentId.Text)
+                };
 
-            int CustID = CustomerDB.AddCustomer(cust);
-            // create a customer session 
-            Session["Customers"] = CustID;
-            //Response.Redirect(~/)
-        }
+                int CustID = CustomerDB.AddCustomer(cust);
+                // create a customer session 
+                Session["Customers"] = CustID;
+                //Response.Redirect(~/)
+            }
+            else
+            {
+                Session["Customer"] = null;
+                Response.Write("UserName is already exist,please try another one.");
+            }
 
 
-
-
-
+        }//end of sumit button
 
 
     }//end of CustomerRegistration class

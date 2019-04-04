@@ -18,7 +18,7 @@ namespace Workshop5.TravelExperts.Domain
     */
     public static class CustomerDB
     {
-        //Add new customer
+        //function to add new customer
         public static int AddCustomer(Customer cust)
         {
             int custID = 0;
@@ -68,6 +68,47 @@ namespace Workshop5.TravelExperts.Domain
 
 
 
+
+
+        //function to check username to make sure it is uniqe
+        public static bool CheckUserName(string username)
+        {
+            int verify;
+            //create the connection
+            SqlConnection con = TravelExpertsDB.GetConnection();
+
+            //command string to check the customer username
+            string check = "select count(*) from Customers where(Customers.UserName=@UserName)";
+
+            SqlCommand cmd = new SqlCommand(check, con);
+            cmd.Parameters.AddWithValue("@UserName", username);
+            
+            try
+            {
+                con.Open();
+                //put the result of count in verify
+                verify = Convert.ToInt32(cmd.ExecuteScalar());
+                //if any customer exists with those first name and lastname)
+                if (verify > 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+
+        }//end of heckUserName function
 
     }// end of CustomerDBclass
 }//end of namespace
