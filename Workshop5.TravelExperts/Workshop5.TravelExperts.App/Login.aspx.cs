@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Workshop5.TravelExperts.Data;
 using Workshop5.TravelExperts.Domain;
 
 namespace Workshop5.TravelExperts.App
@@ -29,8 +30,8 @@ namespace Workshop5.TravelExperts.App
             if (CustomerDB.Login(uname, pass))
             {
                 //if customer already exist 
-                int CustID = CustomerDB.Find(uname);
-                Session["Customer"] = CustID;
+                Customer cust = CustomerDB.Find(uname);
+                Session["Customer"] = cust;
                 Response.Redirect("~/CustomerProfile.aspx");
 
             }

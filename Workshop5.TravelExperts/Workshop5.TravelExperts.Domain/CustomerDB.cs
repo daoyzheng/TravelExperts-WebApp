@@ -148,11 +148,11 @@ namespace Workshop5.TravelExperts.Domain
 
 
         //function to find customerid through the username for login the existing customer
-        public static int Find(string userName)
+        public static Customer Find(string userName)
         {
-            int custID = 0;
+            Customer cust = new Customer();
             SqlConnection con = TravelExpertsDB.GetConnection();
-            string findStatement = "select CustomerId from Customers where (UserName=@UserName)";
+            string findStatement = "select * from Customers where (UserName=@UserName)";
             SqlCommand cmd = new SqlCommand(findStatement, con);
 
             cmd.Parameters.AddWithValue("@UserName", userName);
@@ -162,9 +162,19 @@ namespace Workshop5.TravelExperts.Domain
                 con.Open();
                 //read the row of customer information to get customer id
                 SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.SingleRow);
-                if (reader.Read())
-
-                    custID = Convert.ToInt32(reader["CustomerId"]);
+                if (reader.Read()) {
+                    cust.CustomerId = Convert.ToInt32(reader["CustomerId"]);
+                    cust.CustFirstName = reader["CustFirstName"].ToString();
+                    cust.CustLastName = reader["CustLastName"].ToString();
+                    cust.CustCity = reader["CustCity"].ToString();
+                    cust.CustProv = reader["CustProv"].ToString();
+                    cust.CustPostal = reader["CustPostal"].ToString();
+                    cust.CustCountry = reader["CustCountry"].ToString();
+                    cust.CustHomePhone = reader["CustHomePhone"].ToString();
+                    cust.CustEmail = reader["CustEmail"].ToString();
+                    cust.UserName = reader["UserName"].ToString();
+                    cust.Password = reader["Password"].ToString();
+                }
             }
             catch (Exception ex)
             {
@@ -174,7 +184,7 @@ namespace Workshop5.TravelExperts.Domain
             {
                 con.Close();
             }
-            return custID;
+            return cust;
 
         }//end of Find function
 

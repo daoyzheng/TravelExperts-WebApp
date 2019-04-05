@@ -47,7 +47,7 @@ namespace Workshop5.TravelExperts.App {
 
                 int CustID = CustomerDB.AddCustomer(cust);
                 // create a customer session 
-                Session["Customer"] = CustID;
+                Session["Customer"] = cust;
                 Response.Redirect("~/CustomerOrders.aspx");
             }
             else
