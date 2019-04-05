@@ -138,9 +138,11 @@
     <Content Include="Images\coliseum.jpg" />
     <Content Include="Images\contact.jpg" />
     <Content Include="Images\login.jpg" />
+    <Content Include="Images\loginhere.jpg" />
     <Content Include="Images\moscow.jpg" />
     <Content Include="Images\paris.jpg" />
     <Content Include="Images\Register.jpg" />
+    <Content Include="Images\registerhere.jpg" />
     <Content Include="Images\travel.jpg" />
     <Content Include="Images\venice.jpg" />
     <Content Include="Login.aspx" />

@@ -12,7 +12,7 @@
     <br />
     <br />
    
-    <asp:Image ID="Image1" ImageUrl="~/Images/login.jpg" runat="server" />
+    <asp:Image ID="Image1" ImageUrl="~/Images/loginhere.jpg" runat="server" />
     <br />
     <br />
     <br />
@@ -32,11 +32,20 @@
     </table>
     <br />
     <br />
-    <br />
+    
     <asp:Button ID="uxLogin" runat="server" Text="Login" OnClick="uxLogin_Click" />
     <br />
     <br />
     <br />
-    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/CustomerRegistration.aspx">Register here !</asp:HyperLink>
+    <br />
+    <br />
+    <br />
+    <h4 style="color:blue">Please register if you do not have any account </h4>
+    <br />
+    <a href="CustomerRegistration.aspx"><asp:Image ID="Image2" ImageUrl="~/Images/registerhere.jpg" runat="server" /></a>
+    <br />
+    <br />
+    
+    <%--<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/CustomerRegistration.aspx">Register here !</asp:HyperLink>--%>
 
 </asp:Content>

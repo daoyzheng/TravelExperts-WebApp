@@ -10,8 +10,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <br />
-    
-    <asp:Image ID="Image1" ImageUrl="~/Images/Register.jpg" runat="server" />
+    <h3 style="color:blue">Welcome to registration </h3>
+    <%--<asp:Image ID="Image1" ImageUrl="~/Images/Register.jpg" runat="server" />--%>
     <br />
     <br />
 <table style="width: 784px">
