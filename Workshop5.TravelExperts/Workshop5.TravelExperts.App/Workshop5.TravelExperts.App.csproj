@@ -117,6 +117,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
     <Content Include="Content\Site.css" />
     <Content Include="CustomerOrders.aspx" />
     <Content Include="CustomerProfile.aspx" />
@@ -138,6 +139,7 @@
     <Content Include="Images\banner-img.jpg" />
     <Content Include="Images\coliseum.jpg" />
     <Content Include="Images\contact.jpg" />
+    <Content Include="Images\download-removebg.png" />
     <Content Include="Images\login.jpg" />
     <Content Include="Images\loginhere.jpg" />
     <Content Include="Images\moscow.jpg" />

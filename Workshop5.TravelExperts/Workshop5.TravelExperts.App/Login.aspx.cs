@@ -18,8 +18,9 @@ namespace Workshop5.TravelExperts.App
   * Purpose : login buttton to login existing customer
   */
     public partial class Login : System.Web.UI.Page {
+        public bool ValidLogin { get; set; }
         protected void Page_Load(object sender, EventArgs e) {
-
+            ValidLogin = true;
         }
 
         protected void uxLogin_Click(object sender, EventArgs e)
@@ -33,15 +34,15 @@ namespace Workshop5.TravelExperts.App
                 Customer cust = CustomerDB.Find(uname);
                 Session["Customer"] = cust;
                 Response.Redirect("~/CustomerProfile.aspx");
-
+                
             }
             else
             {
                 //if customer did not register
                 Session["Customer"] = null;
-
+                ValidLogin = false;
                 //Response.Write("Username or Password is not correct.");
-                Response.Write("<script>alert('Username or Password is not correct.')</script>");
+                //Response.Write("<script>alert('Username or Password is not correct.')</script>");
             }
 
         }

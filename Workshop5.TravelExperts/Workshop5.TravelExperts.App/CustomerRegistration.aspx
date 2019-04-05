@@ -26,14 +26,14 @@
     <tr>
         <td style="width: 152px; height: 22px; color:blue"> Password </td>
         <td style="width: 578px; height: 22px;" class="modal-sm">
-            <asp:TextBox ID="uxPassword" runat="server"></asp:TextBox>
+            <asp:TextBox ID="uxPassword" runat="server" TextMode="Password"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="uxPassword" ErrorMessage="RequiredFieldValidator" ForeColor="Red">Password is required to be filled!</asp:RequiredFieldValidator>
         </td>
    </tr>
     <tr>
         <td style="width: 152px; height: 21px; color:blue"> Confirm password </td>
         <td class="modal-sm" style="width: 578px; height: 21px;">
-            <asp:TextBox ID="uxConfirm" runat="server"></asp:TextBox>
+            <asp:TextBox ID="uxConfirm" runat="server" TextMode="Password"></asp:TextBox>
          
             <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="uxPassword" ErrorMessage="CompareValidator" ForeColor="Red" ControlToValidate="uxConfirm" Display="Dynamic" >Password does not match!</asp:CompareValidator>
          
@@ -124,7 +124,7 @@
     <tr>
         <td style="width: 152px; color:blue">Email </td>
         <td style="width: 578px" class="modal-sm">
-            <asp:TextBox ID="uxEmail" runat="server"></asp:TextBox>
+            <asp:TextBox ID="uxEmail" runat="server" TextMode="Email"></asp:TextBox>
         </td>
     </tr>
 
@@ -136,7 +136,6 @@
 <br />
 <br />
     <asp:Button ID="uxSubmit" runat="server" Text="Submit" OnClick="uxSubmit_Click" />
-
 
 <br />
 <br />
