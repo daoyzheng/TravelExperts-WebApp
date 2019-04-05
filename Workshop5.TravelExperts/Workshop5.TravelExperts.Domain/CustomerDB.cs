@@ -166,11 +166,13 @@ namespace Workshop5.TravelExperts.Domain
                     cust.CustomerId = Convert.ToInt32(reader["CustomerId"]);
                     cust.CustFirstName = reader["CustFirstName"].ToString();
                     cust.CustLastName = reader["CustLastName"].ToString();
+                    cust.CustAddress = reader["CustAddress"].ToString();
                     cust.CustCity = reader["CustCity"].ToString();
                     cust.CustProv = reader["CustProv"].ToString();
                     cust.CustPostal = reader["CustPostal"].ToString();
                     cust.CustCountry = reader["CustCountry"].ToString();
                     cust.CustHomePhone = reader["CustHomePhone"].ToString();
+                    cust.CustBusPhone = reader["CustBusPhone"].ToString();
                     cust.CustEmail = reader["CustEmail"].ToString();
                     cust.UserName = reader["UserName"].ToString();
                     cust.Password = reader["Password"].ToString();
@@ -189,6 +191,89 @@ namespace Workshop5.TravelExperts.Domain
         }//end of Find function
 
 
+        /*
+         * author of below code: Hayley Mead
+         * Updating DataBase from when the customer has to edit their information in the customer profile page
+         */
+        //updating customer info in profile
+        public static bool UpdateCust(Customer oldcust, Customer newcust)
+        {
+            SqlConnection connection = TravelExpertsDB.GetConnection();//connection to DB
 
+            bool success = true;
+
+            //finding record it needs to update "old" and replacing it with the "new" customer info
+            string update = "UPDATE Customers SET " +
+                                     "custFirstName = @NewcustFirstName, " +
+                                     "custLastName = @NewcustLastName, " +
+                                     "custAddress = @NewCustAddress, " +
+                                     "custCity = @NewCustCity, " +
+                                     "custProv = @NewCustProv, " +
+                                     "CustCountry = @newCustCountry" +
+                                     "CustHomePhone = @NewCustHomePhone" +
+                                     "CustBusPhone = @NewCustBusPhone" +
+                                     "CustEmail = @NewCustEmail" +
+                                     "UserName = @NewUserName " +
+                                     "Password = @NewPassword" +
+                                     "WHERE custFirstName = @OldcustLastName " + // to identify record to update
+                                     "AND custFirstName = @OldcustLastName " + 
+                                     "AND custAddress = @OldCustAddress " +
+                                     "AND custCity = @OldCustCity" +
+                                     "AND CustProv = @OldCustProv " +
+                                     "AND CustPostal = @OldCustPostal " +
+                                     "AND CustCountry = @OldCustCountry " +
+                                     "AND CustHomePhone = @OldCustHomePHone" +
+                                     "AND CustBusPhone = @OldCustBusPhone" +
+                                     "AND CustEmail = @OldCustEmail" +
+                                     "AND UserName = @OldUserName" +
+                                     "AND Password = @OldPassword";
+                
+            SqlCommand updateCmd = new SqlCommand(update, connection);
+            //New 
+            updateCmd.Parameters.AddWithValue("@NewCustFirstName",newcust.CustFirstName );
+            updateCmd.Parameters.AddWithValue("@NewCustLastName", newcust.CustLastName);
+            updateCmd.Parameters.AddWithValue("@NewCustAddress", newcust.CustAddress);
+            updateCmd.Parameters.AddWithValue("@NewCustCity", newcust.CustCity);
+            updateCmd.Parameters.AddWithValue("@NewCustProv", newcust.CustProv);
+            updateCmd.Parameters.AddWithValue("@NewCustPostal", newcust.CustPostal);
+            updateCmd.Parameters.AddWithValue("@NewCustCountry", newcust.CustCountry);
+            updateCmd.Parameters.AddWithValue("@NewCustHomePhone",newcust.CustHomePhone);
+            updateCmd.Parameters.AddWithValue("@NewCustBusPhone", newcust.CustBusPhone);
+            updateCmd.Parameters.AddWithValue("@NewCustEmail", newcust.CustEmail);
+            updateCmd.Parameters.AddWithValue("@NewUserName",newcust.UserName);
+            updateCmd.Parameters.AddWithValue("@NewPassword",newcust.Password);
+
+
+            //Old
+            updateCmd.Parameters.AddWithValue("@OldFirstName",oldcust.CustFirstName);
+            updateCmd.Parameters.AddWithValue("@OldCustLastName", oldcust.CustLastName);
+            updateCmd.Parameters.AddWithValue("@OldCustAddress", oldcust.CustAddress);
+            updateCmd.Parameters.AddWithValue("@OldCustCity", oldcust.CustCity);
+            updateCmd.Parameters.AddWithValue("@OldCustProv", oldcust.CustProv);
+            updateCmd.Parameters.AddWithValue("@OldCustPostal", oldcust.CustPostal);
+            updateCmd.Parameters.AddWithValue("@OldCustCountry", oldcust.CustCountry);
+            updateCmd.Parameters.AddWithValue("@OldCustHomePhone", oldcust.CustHomePhone);
+            updateCmd.Parameters.AddWithValue("@OldCustBusPhone", oldcust.CustBusPhone);
+            updateCmd.Parameters.AddWithValue("@OldCustEmail", oldcust.CustEmail);
+            updateCmd.Parameters.AddWithValue("@OldUserName", oldcust.UserName);
+            updateCmd.Parameters.AddWithValue("@OldPassword", oldcust.Password);
+
+            try
+            {
+                connection.Open();
+                int rowsUpdated = updateCmd.ExecuteNonQuery();
+                if (rowsUpdated == 0) success = false; //if rows where not updated and success returns false 
+            }
+            catch (Exception ex)//catching all exeptions
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.Close();//closing connection
+            }
+            return success; //returning updated Info if it was "true"
+
+        }
     }// end of CustomerDBclass
-}//end of namespace
+}//end of  
