@@ -9,8 +9,9 @@
     * Purpose :Login page
     */--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div style="position:relative">
-       <h3 style="text-align:center">Sign in to Travel Experts</h3><br />
+    <div style="position:relative;">
+       <img src="Images/download-removebg.png" alt="Icon" height="60" width="60" style="display:block; margin: 40px auto 20px"/>
+       <h3 style="text-align:center; color:blue">Sign in to Travel Experts</h3><br />
     </div>
 
     <%if (ValidLogin == false) {%>
