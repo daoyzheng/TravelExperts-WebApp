@@ -6,7 +6,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Workshop5.TravelExperts.Domain;
 
-namespace Workshop5.TravelExperts.App {
+namespace Workshop5.TravelExperts.App
+{
+   /*
+  * Term 2 Threaded Project 
+  * Author : Mahda Kazemian
+  * Date : April 03,2019
+  * Course Name : Threaded Project for OOSD
+  * Module : PROJ-207-OOSD
+  * Purpose : login buttton to login existing customer
+  */
     public partial class Login : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
 
@@ -15,11 +24,12 @@ namespace Workshop5.TravelExperts.App {
         protected void uxLogin_Click(object sender, EventArgs e)
         {
 
-            string un = Convert.ToString(uxUser.Text);
-            if (!(CustomerDB.CheckUserName(un)))
+            string uname = Convert.ToString(uxUser.Text);
+            string pass = Convert.ToString(uxPass.Text);
+            if (CustomerDB.Login(uname, pass))
             {
                 //if customer already exist 
-                int CustID = CustomerDB.Find(un);
+                int CustID = CustomerDB.Find(uname);
                 Session["Customer"] = CustID;
                 Response.Redirect("~/CustomerProfile.aspx");
 
@@ -29,7 +39,7 @@ namespace Workshop5.TravelExperts.App {
                 //if customer did not register
                 Session["Customer"] = null;
                 //Response.Redirect("~/CustomerRegistration.aspx");
-                Response.Write("You need to register first");
+                Response.Write("Username or Password is not correct.");
             }
 
         }

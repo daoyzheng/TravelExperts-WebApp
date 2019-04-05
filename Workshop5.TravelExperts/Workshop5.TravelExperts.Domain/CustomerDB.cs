@@ -15,7 +15,7 @@ namespace Workshop5.TravelExperts.Domain
     * Date : April 03,2019
     * Course Name : Threaded Project for OOSD
     * Module : PROJ-207-OOSD
-    * Purpose :CustomerDB class to insert customer information
+    * Purpose :CustomerDB class to insert customer information and login
     */
     public static class CustomerDB
     {
@@ -80,7 +80,6 @@ namespace Workshop5.TravelExperts.Domain
 
             SqlCommand cmd = new SqlCommand(check, con);
             cmd.Parameters.AddWithValue("@UserName", username);
-            
             try
             {
                 con.Open();
@@ -105,8 +104,48 @@ namespace Workshop5.TravelExperts.Domain
                 con.Close();
             }
 
-
         }//end of heckUserName function
+
+
+        //Login function for existing customer
+        public static bool Login(string username, string password)
+        {
+            int verify;
+            //create the connection
+            SqlConnection con = TravelExpertsDB.GetConnection();
+
+            //command string to check the customer username and password
+            string login = "select count(*) from Customers where(Customers.UserName=@UserName AND Customers.Password=@Password)";
+
+            SqlCommand cmd = new SqlCommand(login, con);
+            cmd.Parameters.AddWithValue("@UserName", username);
+            cmd.Parameters.AddWithValue("@Password", password);
+
+            try
+            {
+                con.Open();
+                //put the result of count in verify
+                verify = Convert.ToInt32(cmd.ExecuteScalar());
+                //if any customer exists with those username and password
+                if (verify > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+            
+        }//end of login function
 
 
         //function to find customerid through the username for login the existing customer
