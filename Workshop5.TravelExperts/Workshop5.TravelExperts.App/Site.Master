@@ -14,6 +14,7 @@
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="~/Content/custom.css" />
 
 
 </head>
@@ -58,8 +59,8 @@
 
     { %>
 
-             <span class="nav navbar-text navbar-right"><a runat="server" href="~/Login">Sign in</a></span>       
              <span class="nav navbar-text navbar-right"><a runat="server" href="~/CustomerRegistration">Sign up</a></span>       
+             <span class="nav navbar-text navbar-right"><a runat="server" href="~/Login">Sign in</a></span>       
 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
