@@ -20,7 +20,7 @@ namespace Workshop5.TravelExperts.App
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["Customer"] = null;
-            Response.Redirect("~/Login.aspx");
+            Response.Redirect("~/Default.aspx");
         }
     }
 }
