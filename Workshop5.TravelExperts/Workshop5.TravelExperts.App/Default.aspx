@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Workshop5.TravelExperts.App._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
+    <br />
     <asp:Image ID="Image1" ImageUrl="~/Images/download-removebg.png" runat="server" Height="143px" Width="135px" />
    <%-- <h1 style="color:blue; text-align:center">Welcom to Travel Experts</h1>--%>
     <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Italic="True" Font-Size="XX-Large" ForeColor="Blue" Text="Welcome to Travel Experts"></asp:Label>
