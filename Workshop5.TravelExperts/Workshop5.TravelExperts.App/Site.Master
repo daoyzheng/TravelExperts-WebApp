@@ -86,7 +86,7 @@
 
      <% } %>
 
-                   <%-- <p class="nav navbar-text navbar-right">Hello, <asp:LoginName runat="server" />!</p>--%>
+                   <%-- <p class="nav navbar-text navbar-right">Hello, <asp:LoginName runat="server"/>!</p>--%>
                 </div>
             </div>
         </div>
