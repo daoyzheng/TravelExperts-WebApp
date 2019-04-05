@@ -42,7 +42,7 @@ namespace Workshop5.TravelExperts.App {
                     CustHomePhone = uxHomePhone.Text,
                     CustBusPhone = uxBusPhone.Text,
                     CustEmail = uxEmail.Text
-                    // AgentId = Convert.ToInt32(uxAgentId.Text)
+                   
                 };
 
                 int CustID = CustomerDB.AddCustomer(cust);
@@ -53,7 +53,8 @@ namespace Workshop5.TravelExperts.App {
             else
             {
                 Session["Customer"] = null;
-                Response.Write("UserName is already exist,please try another one.");
+                //Response.Write("UserName is already exist,please try another one.");
+                Response.Write("<script>alert('UserName is already exist,please try another one.')</script>");
             }
 
 

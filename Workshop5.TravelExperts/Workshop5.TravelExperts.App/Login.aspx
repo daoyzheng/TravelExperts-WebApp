@@ -1,17 +1,30 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Workshop5.TravelExperts.App.Login" %>
+
+<%--/*
+    * Term 2 Threaded Project 
+    * Author : Mahda Kazemian
+    * Date : April 03,2019
+    * Course Name : Threaded Project for OOSD
+    * Module : PROJ-207-OOSD
+    * Purpose :Login page
+    */--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
+    <br />
+   
+    <asp:Image ID="Image1" ImageUrl="~/Images/login.jpg" runat="server" />
     <br />
     <br />
     <br />
     <table>
         <tr>
-            <td style="width: 102px">Username </td>
+            <td style="width: 102px; color:blue">Username </td>
             <td>
                 <asp:TextBox ID="uxUser" runat="server" Width="145px"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td style="width: 102px">Password</td>
+            <td style="width: 102px; color:blue">Password</td>
             <td>
                 <asp:TextBox ID="uxPass" runat="server" Width="145px"></asp:TextBox>
             </td>

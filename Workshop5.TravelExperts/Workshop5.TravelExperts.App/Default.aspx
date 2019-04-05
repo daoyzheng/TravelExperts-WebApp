@@ -2,7 +2,21 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
+    <asp:Image ID="Image1" ImageUrl="~/Images/travel.jpg" runat="server" Height="143px" Width="135px" />
+   <%-- <h1 style="color:blue; text-align:center">Welcom to Travel Experts</h1>--%>
+    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Italic="True" Font-Size="XX-Large" ForeColor="Blue" Text="Welcome to Travel Experts"></asp:Label>
+    <br />
+    <br />
+    <br />
+    <asp:Image ID="Image2" ImageUrl="~/Images/paris.jpg" runat="server" />
+    <asp:Image ID="Image3" ImageUrl="~/Images/moscow.jpg" runat="server" />
+    <asp:Image ID="Image4" ImageUrl="~/Images/venice.jpg" runat="server" />
+    <asp:Image ID="Image5" ImageUrl="~/Images/coliseum.jpg" runat="server" />
+    <br />
+    <br />
+    <br />
+
+    <%--<div class="jumbotron">
         <h1>ASP.NET</h1>
         <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
         <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
@@ -37,6 +51,7 @@
                 <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
             </p>
         </div>
-    </div>
-
+    </div>--%>
+   
+    
 </asp:Content>

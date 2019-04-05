@@ -10,12 +10,17 @@
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
+        
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
+
 </head>
+    
+ 
 <body>
+    <asp:Image ID="Image2" ImageUrl="~/Images/banner-img.jpg" runat="server" />
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
@@ -36,7 +41,7 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
+       
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -45,28 +50,51 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
+                    <%--<a class="navbar-brand" runat="server" href="~/">Application name</a>--%>
                 </div>
+
+    <% 
+    if (Session["Customer"] == null)
+
+    { %>
+
+             <span class="nav navbar-text navbar-right"><a runat="server" href="~/Login">Sign in</a></span>       
+               
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
+                        <%--<li><a runat="server" href="~/About">About</a></li>--%>
                         <li><a runat="server" href="~/CustomerRegistration">Register</a></li>
                         <li><a runat="server" href="~/CustomerOrders">Your Orders</a></li>
                         <li><a runat="server" href="~/CustomerProfile">Your Profile</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>
-                    <span class="nav navbar-text navbar-right"><a runat="server" href="~/Login">Sign in</a></span>
-                    <p class="nav navbar-text navbar-right">Hello, <asp:LoginName runat="server" />!</p>
+      <%}
+    else
+    { %>
+             <span class="nav navbar-text navbar-right"><a runat="server" href="~/Logout">Sign out</a></span>
+
+                     <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <%--<li><a runat="server" href="~/About">About</a></li>--%>
+                        <li><a runat="server" href="~/CustomerOrders">Your Orders</a></li>
+                        <li><a runat="server" href="~/CustomerProfile">Your Profile</a></li>
+                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                    </ul>
+     <% } %>
+
+                   <%-- <p class="nav navbar-text navbar-right">Hello, <asp:LoginName runat="server" />!</p>--%>
                 </div>
             </div>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                <asp:Image ID="Image1"  ImageUrl="~/Images/travel_banner.jpg" runat="server" />
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p style="color:purple">&copy; <%: DateTime.Now.Year %> Dao,Hayley,Mahda,Tim</p>
             </footer>
         </div>
 

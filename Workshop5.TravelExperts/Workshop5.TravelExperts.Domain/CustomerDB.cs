@@ -42,7 +42,6 @@ namespace Workshop5.TravelExperts.Domain
             cmd.Parameters.AddWithValue("@CustHomePhone", cust.CustHomePhone);
             cmd.Parameters.AddWithValue("@CustBusPhone", cust.CustBusPhone);
             cmd.Parameters.AddWithValue("@CustEmail", cust.CustEmail);
-           // cmd.Parameters.AddWithValue("@AgentId", cust.AgentId);
             cmd.Parameters.AddWithValue("@UserName", cust.UserName);
             cmd.Parameters.AddWithValue("@Password", cust.Password);
 
@@ -85,7 +84,7 @@ namespace Workshop5.TravelExperts.Domain
                 con.Open();
                 //put the result of count in verify
                 verify = Convert.ToInt32(cmd.ExecuteScalar());
-                //if any customer exists with those first name and lastname)
+                //if any customer exists with this username 
                 if (verify > 0)
                 {
                     return false;
@@ -104,7 +103,7 @@ namespace Workshop5.TravelExperts.Domain
                 con.Close();
             }
 
-        }//end of heckUserName function
+        }//end of checkUserName function
 
 
         //Login function for existing customer

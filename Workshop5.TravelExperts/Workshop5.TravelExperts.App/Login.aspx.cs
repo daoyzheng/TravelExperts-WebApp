@@ -38,8 +38,9 @@ namespace Workshop5.TravelExperts.App
             {
                 //if customer did not register
                 Session["Customer"] = null;
-                //Response.Redirect("~/CustomerRegistration.aspx");
-                Response.Write("Username or Password is not correct.");
+
+                //Response.Write("Username or Password is not correct.");
+                Response.Write("<script>alert('Username or Password is not correct.')</script>");
             }
 
         }

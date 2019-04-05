@@ -28,7 +28,6 @@ namespace Workshop5.TravelExperts.Data
         public string CustHomePhone { get; set; }
         public string CustBusPhone { get; set; }
         public string CustEmail { get; set; }
-        //public int AgentId { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
 
