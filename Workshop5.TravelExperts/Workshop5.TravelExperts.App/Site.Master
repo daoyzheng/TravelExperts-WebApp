@@ -59,7 +59,8 @@
     { %>
 
              <span class="nav navbar-text navbar-right"><a runat="server" href="~/Login">Sign in</a></span>       
-               
+             <span class="nav navbar-text navbar-right"><a runat="server" href="~/CustomerRegistration">Sign up</a></span>       
+
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
