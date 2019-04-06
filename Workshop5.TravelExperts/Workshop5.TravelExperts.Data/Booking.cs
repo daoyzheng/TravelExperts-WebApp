@@ -21,6 +21,7 @@ namespace Workshop5.TravelExperts.Data
     {
         public int BookingId { get; set; }
         public DateTime? BookingDate { get; set; }
+        //public string BookingDate { get; set; }
         public string BookingNo { get; set; }
         public double? TravelerCount { get; set; }
         public int? CustomerId { get; set; }

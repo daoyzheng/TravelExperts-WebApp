@@ -10,6 +10,7 @@
 *********************************************************************************/
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -25,22 +26,25 @@ namespace Workshop5.TravelExperts.App
         public List<Package> packages = new List<Package>();
         public List<Booking> bookings = new List<Booking>();
         public List<BookingDetail> bookingDetails = new List<BookingDetail>();
-        public Customer customer = new Customer();
+        public Customer cust = new Customer();
+
+        public string custName { get; set; }
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (Session["Customer"] != null)
-                customer = (Customer)Session["Customer"];
+            {
+                cust = (Customer)Session["Customer"];
+                custName = $"{cust.CustFirstName} {cust.CustLastName}";
+            }
+
             else
             {
                 Response.Redirect("~/login.aspx");
             }
 
-            //if (((Customer)Session["Customer"]) != null)
-            //    customer = (Customer)Session["Customer"];
-            //else Customer = null;
 
             if (!IsPostBack)
             {
@@ -49,35 +53,66 @@ namespace Workshop5.TravelExperts.App
                 bookingDetails = BookingDetailDB.GetAllBookingDetails();
 
                 // Three table LINQ join to extract relevant Fields.
-                List<BookingSummary> custSummary =
+                List<BookingSummary> bookSummary =
                     (from b in bookings
                      join bd in bookingDetails on b.BookingId equals bd.BookingId
-                     where b.CustomerId == customer.CustomerId
+                     where b.CustomerId == cust.CustomerId
                      select new BookingSummary
                      {
-                         //CustomerId = (int)customer.CustomerId,
-                         //CustName = customer.CustFirstName + " " + customer.CustLastName,
-                         //BookingNo = b.BookingNo,
-                         //BookingDate = (DateTime)b.BookingDate,
-                         //Description = bd.Description,
-                         //TripStartDate = (DateTime)bd.TripStart,
-                         //TripEndDate = (DateTime)bd.TripEnd,
-                         //BBasePrice = (decimal)bd.BasePrice,
-                         //BAgencyCommission = (decimal)bd.AgencyCommission
-
                          BookingNo = b.BookingNo,
-                         BookingDate = (b.BookingDate).ToString(),
+                         BookingDate = ((DateTime)(b.BookingDate)).ToString("d"),
                          Description = bd.Description,
-                         TripStartDate = bd.TripStart.ToString(),
-                         TripEndDate = bd.TripEnd.ToString(),
-                         BBasePrice = Convert.ToString(bd.BasePrice),
-                         BAgencyCommission = bd.AgencyCommission.ToString(),
-                         Total = (bd.BasePrice + bd.AgencyCommission).ToString()
+                         TripStartDate = ((DateTime)bd.TripStart).ToString("d"),
+                         TripEndDate   = ((DateTime)bd.TripEnd).ToString("d"),
+                         BBasePrice = ((decimal)(bd.BasePrice)).ToString("c"),
+                         BAgencyCommission = ((decimal)(bd.AgencyCommission)).ToString("c"),
+                         Total = ((decimal)(bd.BasePrice + bd.AgencyCommission)).ToString("c")
 
                      }).ToList();
+                // iterate through the BookingSummary List to calculate column
+                // totals for Price, Commission and Total
+                decimal totBase = 0.0m;
+                decimal totComm = 0.0m;
+                decimal totTotl = 0.0m;
+                foreach(BookingSummary book in bookSummary)
+                {
+                    string temp = "";
+                    temp = (book.BBasePrice).Remove(0,1);
+                    totBase += decimal.Parse(temp);
+                    temp = (book.BAgencyCommission).Remove(0, 1);
+                    totComm += decimal.Parse(temp);
+                    temp = (book.Total).Remove(0, 1);
+                    totTotl += decimal.Parse(temp);
+                }
+                // Concoct dummy BookingSummary Record for last Totals line in table
+                BookingSummary book1 = new BookingSummary();
+                book1.BookingNo = "";
+                book1.BookingDate = "";
+                book1.Description = "";
+                book1.TripStartDate = "";
+                book1.TripEndDate = "Totals";
+                book1.BBasePrice = totBase.ToString("c");
+                book1.BAgencyCommission = totComm.ToString("c");
+                book1.Total = totTotl.ToString("c");
 
-                gvwTravelData.DataSource = custSummary;
+                bookSummary.Add(book1);
+
+                gvwTravelData.DataSource = bookSummary;
+
+
                 gvwTravelData.DataBind();
+
+                
+
+                //gvwTravelData
+
+                //                gvwTravelData.Columns["TripStartDate"].DefaultCellStyle = "c";
+
+                //BoundField fieldStartDate = gvwTravelData.Columns[3] as BoundField;
+                //fieldStartDate.DataFormatString = "{D}";
+                //gvwTravelData.DataBind();
+
+                //                gvwTravelData.Columns[4].ItemStyle.Width = 100;
 
                 //int temp = 0;
                 //decimal total = 0.0m;
@@ -91,6 +126,37 @@ namespace Workshop5.TravelExperts.App
                 //}
             }
         }
-   }
+
+        protected void gvwTravelData_PreRender(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        protected void gvwTravelData_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            GridViewRow gvr = e.Row;
+            if (gvr.RowType == DataControlRowType.Header)
+            {
+                gvr.Cells[0].Text = "Booking Number";
+                gvr.Cells[1].Text = "Booking Date";
+                gvr.Cells[2].Text = "Description";
+                gvr.Cells[3].Text = "Trip Start";
+                gvr.Cells[4].Text = "Trip End";
+                gvr.Cells[5].Text = "Base Price";
+                gvr.Cells[6].Text = "Commission";
+                gvr.Cells[7].Text = "Line Total";
+                gvr.Cells[0].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[1].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[2].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[3].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[4].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[5].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[6].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[7].HorizontalAlign = HorizontalAlign.Center;
+
+            }
+        }
+    }
 }
    

@@ -51,9 +51,9 @@ namespace Workshop5.TravelExperts.Domain
                         bookingDetail.TripStart = (DateTime)dr["TripStart"];
 
                     if (dr["TripEnd"] == DBNull.Value)
-                        bookingDetail.TripStart = null;
+                        bookingDetail.TripEnd = null;
                     else
-                        bookingDetail.TripStart = (DateTime)dr["TripEnd"];
+                        bookingDetail.TripEnd = (DateTime)dr["TripEnd"];
 
                     bookingDetail.Description = (string)dr["Description"];
 
