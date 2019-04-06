@@ -60,6 +60,21 @@ namespace Workshop5.TravelExperts.App {
 
         }//end of sumit button
 
+        protected void uxClear_Click(object sender, EventArgs e) {
+            uxUsername.Text = String.Empty;
+            uxPassword.Text = String.Empty;
+            uxConfirm.Text = String.Empty;
+            uxFirstName.Text = String.Empty;
+            uxLastName.Text = String.Empty;
+            uxAddress.Text = String.Empty;
+            uxCity.Text = String.Empty;
+            DropDownList1.SelectedIndex = 0;
+            uxPostal.Text = String.Empty;
+            uxCountry.Text = String.Empty;
+            uxHomePhone.Text = String.Empty;
+            uxBusPhone.Text = String.Empty;
+            uxEmail.Text = String.Empty;
 
+        }
     }//end of CustomerRegistration class
 }//end of namespace

@@ -162,5 +162,6 @@
             </div>
         </div>
     </div>
-    <asp:Button ID="uxSubmit" runat="server" Text="Register" OnClick="uxSubmit_Click" />
+    <asp:Button ID="uxClear" runat="server" Text="Clear" Height="35px" Width="200px" OnClick="uxClear_Click" style="position:relative; left: 300px" CssClass="btnLogin" CausesValidation="false"/>
+    <asp:Button ID="uxSubmit" runat="server" Text="Create an account" Height="35px" Width="200px" OnClick="uxSubmit_Click" CssClass="btnLogin" style="position:relative; left:500px"/>
 </asp:Content>
