@@ -40,11 +40,26 @@ namespace Workshop5.TravelExperts.Domain
                     Package package = new Package();
                     package.PackageId = (int)dr["PackageId"];
                     package.PkgName = (string)dr["PkgName"];
-                    package.PkgStartDate = (DateTime)dr["PkgStartDate"];
-                    package.PkgEndDate = (DateTime)dr["PkgEndDate"];
+
+                    if (dr["PkgStartDate"] == DBNull.Value)
+                        package.PkgStartDate = null;
+                    else
+                        package.PkgStartDate = (DateTime)dr["PkgStartDate"];
+
+                    if (dr["PkgEndDate"] == DBNull.Value)
+                        package.PkgEndDate = null;
+                    else
+                        package.PkgEndDate = (DateTime)dr["PkgEndDate"];
+
                     package.PkgDesc = (string)dr["PkgDesc"];
+
                     package.PkgBasePrice = (decimal)dr["PkgBasePrice"];
-                    package.PkgAgencyCommission = (decimal)dr["PkgAgencyCommission"];
+
+                    if (dr["PkgAgencyCommission"] == DBNull.Value)
+                        package.PkgAgencyCommission = null;
+                    else
+                        package.PkgAgencyCommission = (decimal)dr["PkgAgencyCommission"];
+
                     packages.Add(package);
                 }
             }
