@@ -12,7 +12,7 @@
             <h2>Travel Summary</h2>
             <table>
               <tr>
-                  <td><asp:GridView ID="gvwTravelData" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center">
+                  <td><asp:GridView ID="gvwTravelData" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None" HorizontalAlign="Center" Width="829px">
                       <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                       <EditRowStyle BackColor="#999999" />
                       <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -24,7 +24,9 @@
                       <SortedAscendingHeaderStyle BackColor="#506C8C" />
                       <SortedDescendingCellStyle BackColor="#FFFDF8" />
                       <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
-                      </asp:GridView></td>
+                      </asp:GridView>
+                      <asp:ObjectDataSource ID="ObjectDataSource1" runat="server"></asp:ObjectDataSource>
+                  </td>
               </tr>
             </table>
         </div>
