@@ -7,3 +7,38 @@
 .btnLogin:hover {
     background-color:dodgerblue;
 }
+
+
+.customerRegistrationForm {
+    position:relative; 
+    width:100%; 
+    top:5px; 
+    display:flex;
+    position:relative;
+    left:50%;
+    margin-left:-40%;
+    /*background-color:lightblue;*/
+}
+
+.container {
+    margin: 0 5px; 
+}
+
+.form-box {
+    width:100%;
+    display:flex; 
+    flex-direction:column;
+    margin-bottom:8px;
+}
+
+.form-box .txt-wrapper {
+    display:flex;
+}
+
+.txtbox {
+    width:350px;
+}
+
+input {
+    max-width:500px;
+}
