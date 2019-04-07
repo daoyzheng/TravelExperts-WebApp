@@ -118,91 +118,13 @@
             <asp:TextBox ID="txtEmail" runat="server" Enabled="False"></asp:TextBox>
         </td>
     </tr>
-
-
 </table>
 <br />
 <br />
 <br />
 <br />
 <br />
-    <table>    
-    <tr>
-        <td>
-            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" Visible="False" BorderStyle="Groove" /></td>
-        <td>
-            <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" /></td>
-    </tr></table>
+ <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" Visible="False" BorderStyle="Groove" />
 <br />
 <br />
-
-    
-    
-    
-    
-    <%--<br />
-    <br />
-    <br />
-    <br />
-
-    <asp:Label ID="CustInfo" runat="server" Text="Customer Information" Font-Size="Larger"></asp:Label>
-    <br />
-    <asp:HyperLink ID="hypOne" runat="server">Edit</asp:HyperLink>
-    <br />
-    <table>
-        <tr>
-            <td>
-                <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-
-            </td>
-            <td>
-                <asp:TextBox ID="TextBox1" runat="server" Enabled="False"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label></td>
-            <td>
-                <asp:TextBox ID="TextBox2" runat="server" Enabled="False"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label></td>
-            <td>
-                <asp:TextBox ID="TextBox3" runat="server" Enabled="False"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label></td>
-            <td>
-                <asp:TextBox ID="TextBox4" runat="server" Enabled="False"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label></td>
-            <td>
-                <asp:TextBox ID="TextBox5" runat="server" Enabled="False"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td>
-                <asp:Label ID="Label7" runat="server" Text="Label"></asp:Label></td>
-            <td>
-                <asp:TextBox ID="TextBox6" runat="server" Enabled="False"></asp:TextBox>
-            </td>
-        </tr>
-
-    </table>
-    <br />
-    <br />
-    <table>     
-        <tr>
-            <td>
-                <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" Visible="False" /></td>
-            <td>
-                <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" /></td>
-        </tr>
-    </table>
-    <br />
-    <br />--%>
 </asp:Content>

@@ -7,9 +7,18 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Workshop5.TravelExperts.Data;
 using Workshop5.TravelExperts.Domain;
-
+/*
+ * Author:Hayley Mead
+ * 
+ */
 namespace Workshop5.TravelExperts.App {
     public partial class CustomerProfile : System.Web.UI.Page {
+        ////private Customer oldcust; // might remove
+        //public bool updatecust; // 
+        //public Customer customer; // current customer
+        //private Customer oldcust;
+        //private Customer newcust;
+        bool dataIsValid;
         protected void Page_Load(object sender, EventArgs e)
         {
             RequiredFieldValidator8.Enabled = false;
@@ -43,19 +52,28 @@ namespace Workshop5.TravelExperts.App {
             }
         }
 
-        protected void btnSave_Click(object sender, EventArgs e) //btnSave
+        protected void btnSave_Click(object sender, EventArgs e)
         {
-            //if edit is clicked make save visable
+            //Session["Customer"];
+            Customer oldCust = new Customer();
 
-            //if anything changed, update DB
+                Customer newCust = new Customer();
+                newCust.CustFirstName = txtFirstName.Text;
+                newCust.CustLastName = txtLastName.Text;
+                newCust.CustAddress = txtAddress.Text;
+                newCust.CustCity = txtCity.Text;
+                newCust.CustProv = DropDownList1.SelectedValue.ToString();
+                newCust.CustPostal = txtPostal.Text;
+                newCust.CustCountry = txtCountry.Text;
+                newCust.CustHomePhone = txtHomePhone.Text;
+                newCust.CustBusPhone = txtBusPhone.Text;
+                newCust.CustEmail = txtEmail.Text;
+                newCust.UserName = txtUsername.Text;
+                newCust.Password = txtPassword.Text;
 
-
-        }
-
-        protected void btnCancel_Click(object sender, EventArgs e)//btnCancel
-        {
-            //when cancel btn is clicked exit out of "edit mode" and any changes will not be saved
-
+                // Then you could pass the oldCust along with the newCust to your UpdateCustomer  DB method
+                CustomerDB.UpdateCust(oldCust, newCust);
+            
         }
 
         protected void btnEdit_Click(object sender, EventArgs e)

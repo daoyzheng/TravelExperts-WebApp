@@ -195,8 +195,7 @@ namespace Workshop5.TravelExperts.Domain
          * author of below code: Hayley Mead
          * Updating DataBase from when the customer has to edit their information in the customer profile page
          */
-        //updating customer info in profile
-        public static bool UpdateCust(Customer oldcust, Customer newcust)
+        public static bool UpdateCust(Customer oldCust, Customer newCust)
         {
             SqlConnection connection = TravelExpertsDB.GetConnection();//connection to DB
 
@@ -230,33 +229,33 @@ namespace Workshop5.TravelExperts.Domain
                 
             SqlCommand updateCmd = new SqlCommand(update, connection);
             //New 
-            updateCmd.Parameters.AddWithValue("@NewCustFirstName",newcust.CustFirstName );
-            updateCmd.Parameters.AddWithValue("@NewCustLastName", newcust.CustLastName);
-            updateCmd.Parameters.AddWithValue("@NewCustAddress", newcust.CustAddress);
-            updateCmd.Parameters.AddWithValue("@NewCustCity", newcust.CustCity);
-            updateCmd.Parameters.AddWithValue("@NewCustProv", newcust.CustProv);
-            updateCmd.Parameters.AddWithValue("@NewCustPostal", newcust.CustPostal);
-            updateCmd.Parameters.AddWithValue("@NewCustCountry", newcust.CustCountry);
-            updateCmd.Parameters.AddWithValue("@NewCustHomePhone",newcust.CustHomePhone);
-            updateCmd.Parameters.AddWithValue("@NewCustBusPhone", newcust.CustBusPhone);
-            updateCmd.Parameters.AddWithValue("@NewCustEmail", newcust.CustEmail);
-            updateCmd.Parameters.AddWithValue("@NewUserName",newcust.UserName);
-            updateCmd.Parameters.AddWithValue("@NewPassword",newcust.Password);
+            updateCmd.Parameters.AddWithValue("@NewCustFirstName",newCust.CustFirstName );
+            updateCmd.Parameters.AddWithValue("@NewCustLastName", newCust.CustLastName);
+            updateCmd.Parameters.AddWithValue("@NewCustAddress", newCust.CustAddress);
+            updateCmd.Parameters.AddWithValue("@NewCustCity", newCust.CustCity);
+            updateCmd.Parameters.AddWithValue("@NewCustProv", newCust.CustProv);
+            updateCmd.Parameters.AddWithValue("@NewCustPostal", newCust.CustPostal);
+            updateCmd.Parameters.AddWithValue("@NewCustCountry", newCust.CustCountry);
+            updateCmd.Parameters.AddWithValue("@NewCustHomePhone",newCust.CustHomePhone);
+            updateCmd.Parameters.AddWithValue("@NewCustBusPhone", newCust.CustBusPhone);
+            updateCmd.Parameters.AddWithValue("@NewCustEmail", newCust.CustEmail);
+            updateCmd.Parameters.AddWithValue("@NewUserName",newCust.UserName);
+            updateCmd.Parameters.AddWithValue("@NewPassword",newCust.Password);
 
 
             //Old
-            updateCmd.Parameters.AddWithValue("@OldFirstName",oldcust.CustFirstName);
-            updateCmd.Parameters.AddWithValue("@OldCustLastName", oldcust.CustLastName);
-            updateCmd.Parameters.AddWithValue("@OldCustAddress", oldcust.CustAddress);
-            updateCmd.Parameters.AddWithValue("@OldCustCity", oldcust.CustCity);
-            updateCmd.Parameters.AddWithValue("@OldCustProv", oldcust.CustProv);
-            updateCmd.Parameters.AddWithValue("@OldCustPostal", oldcust.CustPostal);
-            updateCmd.Parameters.AddWithValue("@OldCustCountry", oldcust.CustCountry);
-            updateCmd.Parameters.AddWithValue("@OldCustHomePhone", oldcust.CustHomePhone);
-            updateCmd.Parameters.AddWithValue("@OldCustBusPhone", oldcust.CustBusPhone);
-            updateCmd.Parameters.AddWithValue("@OldCustEmail", oldcust.CustEmail);
-            updateCmd.Parameters.AddWithValue("@OldUserName", oldcust.UserName);
-            updateCmd.Parameters.AddWithValue("@OldPassword", oldcust.Password);
+            updateCmd.Parameters.AddWithValue("@OldFirstName",oldCust.CustFirstName);
+            updateCmd.Parameters.AddWithValue("@OldCustLastName", oldCust.CustLastName);
+            updateCmd.Parameters.AddWithValue("@OldCustAddress", oldCust.CustAddress);
+            updateCmd.Parameters.AddWithValue("@OldCustCity", oldCust.CustCity);
+            updateCmd.Parameters.AddWithValue("@OldCustProv", oldCust.CustProv);
+            updateCmd.Parameters.AddWithValue("@OldCustPostal", oldCust.CustPostal);
+            updateCmd.Parameters.AddWithValue("@OldCustCountry", oldCust.CustCountry);
+            updateCmd.Parameters.AddWithValue("@OldCustHomePhone", oldCust.CustHomePhone);
+            updateCmd.Parameters.AddWithValue("@OldCustBusPhone", oldCust.CustBusPhone);
+            updateCmd.Parameters.AddWithValue("@OldCustEmail", oldCust.CustEmail);
+            updateCmd.Parameters.AddWithValue("@OldUserName", oldCust.UserName);
+            updateCmd.Parameters.AddWithValue("@OldPassword", oldCust.Password);
 
             try
             {
@@ -273,7 +272,6 @@ namespace Workshop5.TravelExperts.Domain
                 connection.Close();//closing connection
             }
             return success; //returning updated Info if it was "true"
-
         }
     }// end of CustomerDBclass
 }//end of  
