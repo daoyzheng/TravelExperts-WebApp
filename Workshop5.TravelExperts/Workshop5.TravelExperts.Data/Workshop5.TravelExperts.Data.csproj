@@ -47,6 +47,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="BookingSummary.cs" />
     <Compile Include="Package.cs" />
+    <Compile Include="PackageSummary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

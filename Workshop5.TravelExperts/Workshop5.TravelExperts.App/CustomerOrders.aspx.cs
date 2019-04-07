@@ -28,8 +28,10 @@ namespace Workshop5.TravelExperts.App
         public List<BookingDetail> bookingDetails = new List<BookingDetail>();
         public Customer cust = new Customer();
 
-        public string custName { get; set; }
+        public bool bookS = false;
+        public bool packS = false;
 
+        public string custName { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,12 +41,10 @@ namespace Workshop5.TravelExperts.App
                 cust = (Customer)Session["Customer"];
                 custName = $"{cust.CustFirstName} {cust.CustLastName}";
             }
-
             else
             {
                 Response.Redirect("~/login.aspx");
             }
-
 
             if (!IsPostBack)
             {
@@ -52,7 +52,7 @@ namespace Workshop5.TravelExperts.App
                 bookings = BookingDB.GetAllBookings();
                 bookingDetails = BookingDetailDB.GetAllBookingDetails();
 
-                // Three table LINQ join to extract relevant Fields.
+                // Two table LINQ join to extract relevant Fields.
                 List<BookingSummary> bookSummary =
                     (from b in bookings
                      join bd in bookingDetails on b.BookingId equals bd.BookingId
@@ -99,53 +99,107 @@ namespace Workshop5.TravelExperts.App
 
                 gvwTravelData.DataSource = bookSummary;
 
-
+ 
                 gvwTravelData.DataBind();
 
-                
+//                gvwTravelData.HeaderRow.Cells[0].HorizontalAlign = HorizontalAlign.Center;
 
-                //gvwTravelData
+                int rowCount = gvwTravelData.Rows.Count;
+//                gvwTravelData.Rows[rowCount - 1].Cells[3].;
 
-                //                gvwTravelData.Columns["TripStartDate"].DefaultCellStyle = "c";
+                gvwTravelData.Rows[rowCount - 1].Cells[4].Font.Bold = true;
+                gvwTravelData.Rows[rowCount - 1].Cells[5].Font.Bold = true;
+                gvwTravelData.Rows[rowCount - 1].Cells[6].Font.Bold = true;
+                gvwTravelData.Rows[rowCount - 1].Cells[7].Font.Bold = true;
 
-                //BoundField fieldStartDate = gvwTravelData.Columns[3] as BoundField;
-                //fieldStartDate.DataFormatString = "{D}";
-                //gvwTravelData.DataBind();
+                gvwTravelData.HeaderRow.HorizontalAlign = HorizontalAlign.Center;
 
-                //                gvwTravelData.Columns[4].ItemStyle.Width = 100;
+                // Two table LINQ join to extract relevant Fields.
+                //List<PackageSummary> packSummary =
+                //    (from b in bookings
+                //     join p in packages on b.PackageId equals p.PackageId
+                //     where b.CustomerId == cust.CustomerId
+                //     select new PackageSummary
+                //     {
+                //         PackageId = p.PackageId.ToString(),
+                //         PkgName = p.PkgName,
+                //         PkgDescription = p.PkgDesc,
+                //         PkgStartDate = ((DateTime)p.PkgStartDate).ToString("d"),
+                //         PkgEndDate = ((DateTime)p.PkgEndDate).ToString("d"),
+                //         PBasePrice = ((decimal)(p.PkgBasePrice)).ToString("c"),
+                //         PAgencyCommission = ((decimal)(p.PkgAgencyCommission)).ToString("c"),
+                //         Total = ((decimal)(p.PkgBasePrice + p.PkgAgencyCommission)).ToString("c")
+                //     }).ToList();
 
-                //int temp = 0;
-                //decimal total = 0.0m;
-                //for (int i = 0; i < gvwTravelData.Rows.Count; i++)
-                //{
-                //    decimal bp = Convert.ToDecimal(gvwTravelData.Rows[i].Cells[5].Text);
-                //    decimal ac = Convert.ToDecimal(gvwTravelData.Rows[i].Cells[6].Text);
-                //    gvwTravelData.Rows[i].Cells[7].Text = (bp + ac).ToString("c");
+                List<BookingSummary> packSummary =
+                    (from b in bookings
+                     join p in packages on b.PackageId equals p.PackageId
+                     where b.CustomerId == cust.CustomerId
+                     select new BookingSummary
+                     {
+                         BookingNo = b.BookingNo.ToString(),
+                         BookingDate = ((DateTime)(b.BookingDate)).ToString("d"),
+                         Description = p.PkgDesc,
+                         TripStartDate = ((DateTime)p.PkgStartDate).ToString("d"),
+                         TripEndDate = ((DateTime)p.PkgEndDate).ToString("d"),
+                         BBasePrice = ((decimal)(p.PkgBasePrice)).ToString("c"),
+                         BAgencyCommission = ((decimal)(p.PkgAgencyCommission)).ToString("c"),
+                         Total = ((decimal)(p.PkgBasePrice + p.PkgAgencyCommission)).ToString("c")
+                     }).ToList();
 
-                //    //decimal up = Convert.ToDecimal(orderGridView1.Rows[i].Cells[2].Value);
-                //}
+                bool isEmpty = !packSummary.Any();
+                if (isEmpty) return;
+
+                // iterate through the BookingSummary List to calculate column
+                // totals for Price, Commission and Total
+                totBase = 0.0m;
+                totComm = 0.0m;
+                totTotl = 0.0m;
+                foreach (BookingSummary pack in packSummary)
+                {
+                    string temp = "";
+                    temp = (pack.BBasePrice).Remove(0, 1);
+                    totBase += decimal.Parse(temp);
+                    temp = (pack.BAgencyCommission).Remove(0, 1);
+                    totComm += decimal.Parse(temp);
+                    temp = (pack.Total).Remove(0, 1);
+                    totTotl += decimal.Parse(temp);
+                }
+                // Concoct dummy BookingSummary Record for last Totals line in table
+                BookingSummary pack1 = new BookingSummary();
+                pack1.BookingNo = "";
+                pack1.BookingDate = "";
+                pack1.Description = "";
+                pack1.TripEndDate = "";
+                pack1.TripEndDate = "Totals";
+                pack1.BBasePrice = totBase.ToString("c");
+                pack1.BAgencyCommission = totComm.ToString("c");
+                pack1.Total = totTotl.ToString("c");
+
+                packSummary.Add(pack1);
+
+                if (packSummary != null)
+                    packS = true;
+
+                gvwTravelData1.DataSource = packSummary;
+
+                gvwTravelData1.DataBind();
+
+                rowCount = gvwTravelData1.Rows.Count;
+
+                gvwTravelData1.Rows[rowCount - 1].Cells[4].Font.Bold = true;
+                gvwTravelData1.Rows[rowCount - 1].Cells[5].Font.Bold = true;
+                gvwTravelData1.Rows[rowCount - 1].Cells[6].Font.Bold = true;
+                gvwTravelData1.Rows[rowCount - 1].Cells[7].Font.Bold = true;
             }
         }
 
-        protected void gvwTravelData_PreRender(object sender, EventArgs e)
-        {
-            
-
-        }
 
         protected void gvwTravelData_RowCreated(object sender, GridViewRowEventArgs e)
         {
             GridViewRow gvr = e.Row;
             if (gvr.RowType == DataControlRowType.Header)
             {
-                gvr.Cells[0].Text = "Booking Number";
-                gvr.Cells[1].Text = "Booking Date";
-                gvr.Cells[2].Text = "Description";
-                gvr.Cells[3].Text = "Trip Start";
-                gvr.Cells[4].Text = "Trip End";
-                gvr.Cells[5].Text = "Base Price";
-                gvr.Cells[6].Text = "Commission";
-                gvr.Cells[7].Text = "Line Total";
                 gvr.Cells[0].HorizontalAlign = HorizontalAlign.Center;
                 gvr.Cells[1].HorizontalAlign = HorizontalAlign.Center;
                 gvr.Cells[2].HorizontalAlign = HorizontalAlign.Center;
@@ -155,8 +209,66 @@ namespace Workshop5.TravelExperts.App
                 gvr.Cells[6].HorizontalAlign = HorizontalAlign.Center;
                 gvr.Cells[7].HorizontalAlign = HorizontalAlign.Center;
 
+                gvr.Cells[0].Text = "Booking Number";
+                gvr.Cells[1].Text = "Booking Date";
+                gvr.Cells[2].Text = "Description";
+                gvr.Cells[3].Text = "Trip Start";
+                gvr.Cells[4].Text = "Trip End";
+                gvr.Cells[5].Text = "Base Price";
+                gvr.Cells[6].Text = "Commission";
+                gvr.Cells[7].Text = "Line Total";
+
             }
         }
+
+        protected void gvwTravelData1_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            //GridViewRow headerRow = gvwTravelData.HeaderRow;
+            //headerRow.Cells[0].HorizontalAlign = HorizontalAlign.Center;
+            GridViewRow gvr = e.Row;
+            if (gvr.RowType == DataControlRowType.Header)
+            {
+                gvr.Cells[0].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[1].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[2].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[3].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[4].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[5].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[6].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[7].HorizontalAlign = HorizontalAlign.Center;
+
+                gvr.Cells[0].Text = "Booking Number";
+                gvr.Cells[1].Text = "Booking Date";
+                gvr.Cells[2].Text = "Description";
+                gvr.Cells[3].Text = "Trip Start";
+                gvr.Cells[4].Text = "Trip End";
+                gvr.Cells[5].Text = "Base Price";
+                gvr.Cells[6].Text = "Commission";
+                gvr.Cells[7].Text = "Line Total";
+
+                //gvr.Cells[0].Text = "Package Id";
+                //gvr.Cells[1].Text = "Package Name";
+                //gvr.Cells[2].Text = "Package Start Date";
+                //gvr.Cells[3].Text = "Package End Date";
+                //gvr.Cells[4].Text = "Package Description";
+                //gvr.Cells[5].Text = "Base Price";
+                //gvr.Cells[6].Text = "Commission";
+                //gvr.Cells[7].Text = "Line Total";
+
+                gvr.Cells[0].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[1].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[2].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[3].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[4].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[5].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[6].HorizontalAlign = HorizontalAlign.Center;
+                gvr.Cells[7].HorizontalAlign = HorizontalAlign.Center;
+
+
+            }
+
+        }
+
     }
 }
    

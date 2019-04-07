@@ -7,27 +7,63 @@
     </div> -->
 
     <div class="row">
-        <div class="col-md-4">
-            <p><%=custName%>, here is your Travel Summary:</p>
-            <table>
+        <div style ="width:100%; margin:50px">
+            <h4><%=custName%>, here is your Travel Product Summary:</h4>
+            <table style="width:100%; text-align:center">
               <tr>
-                  <td><asp:GridView ID="gvwTravelData" runat="server" CellPadding="20" ForeColor="#333333" GridLines="Vertical" HorizontalAlign="Center" Width="829px" OnPreRender="gvwTravelData_PreRender" OnRowCreated="gvwTravelData_RowCreated" >
-                      <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                  <th style ="text-align:center"></th>
+              </tr>
+              <tr>
+                  <td style="width:100%; text-align:center">
+                      <asp:GridView ID="gvwTravelData" runat="server" HeaderStyle-CssClass="text-center"  CellPadding  ="20" ForeColor="#333333" GridLines="Vertical" HorizontalAlign="Center" Width="100%" OnRowCreated="gvwTravelData_RowCreated" >
+                         <%--<Columns>
+                              <asp:BoundField HeaderStyle-HorizontalAlign="Center" />
+                          </Columns>--%>
+                      <AlternatingRowStyle BackColor="White" ForeColor="#284775" HorizontalAlign="Center" />
                       <EditRowStyle BackColor="#999999" HorizontalAlign="Center" Width="50px" />
                       <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                      <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" HorizontalAlign="Center"/>
+                      <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
                       <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                       <RowStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" />
                       <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
                       <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                      <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                      <SortedAscendingHeaderStyle BackColor="#506C8C" HorizontalAlign="Center" />
                       <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                      <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                      <SortedDescendingHeaderStyle BackColor="#6F8DAE" HorizontalAlign="Center" />
                       </asp:GridView>
-                      <asp:ObjectDataSource ID="ObjectDataSource1" runat="server"></asp:ObjectDataSource>
+<!--                      <asp:ObjectDataSource ID="ObjectDataSource1" runat="server"></asp:ObjectDataSource> -->
                   </td>
               </tr>
             </table>
+
+            <div>
+            <% if (packS == true)
+                {%>
+                <h4><%=custName%>, here is your Travel Package Summary:</h4>
+                <%} %>
+            <table>
+              <tr>
+                  <th style="text-align:center"></th>
+              </tr>               
+                  <tr>
+                  <td>
+                      <asp:GridView ID="gvwTravelData1" runat="server" Width="1080px" CellPadding="4" ForeColor="#333333" GridLines="Vertical" OnRowCreated="gvwTravelData1_RowCreated">
+                          <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                          <EditRowStyle BackColor="#999999" />
+                          <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                          <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                          <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                          <RowStyle BackColor="#F7F6F3" ForeColor="#333333" HorizontalAlign="Center" />
+                          <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
+                          <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                          <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                          <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                          <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                      </asp:GridView>
+                  </td>
+              </tr>
+          </table>
+          </div>
         </div>
     </div>
 </asp:Content>

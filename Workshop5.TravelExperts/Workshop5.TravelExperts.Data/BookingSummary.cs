@@ -1,4 +1,14 @@
-﻿using System;
+﻿/********************************************************************************
+* 
+* Author: Tim Leslie
+* Date: April 5, 2019.
+* Course: CPRG 217 Rapid OOSD Threaded Project
+* Assignment: Workshop 5
+* Purpose: This is a Booking class definition and forms part of the CPRG 214
+* Threaded Project Workshop 5.
+*
+*********************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

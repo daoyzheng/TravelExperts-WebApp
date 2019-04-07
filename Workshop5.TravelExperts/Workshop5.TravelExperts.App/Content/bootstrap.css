@@ -2255,10 +2255,9 @@ caption {
   padding-top: 8px;
   padding-bottom: 8px;
   color: #777;
-  text-align: left;
 }
 th {
-  text-align: left;
+ 
 }
 .table {
   width: 100%;
@@ -4849,7 +4848,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   font-weight: bold;
   line-height: 1;
   color: #fff;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: .25em;

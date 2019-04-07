@@ -35,6 +35,11 @@
     display:flex;
 }
 
+.GridHeader th
+{
+    text-align:center;
+}
+
 .txtbox {
     width:350px;
 }
