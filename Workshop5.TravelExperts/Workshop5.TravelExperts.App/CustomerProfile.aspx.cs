@@ -10,31 +10,19 @@ using Workshop5.TravelExperts.Data;
 using Workshop5.TravelExperts.Domain;
 /*
  * Author:Hayley Mead
- * course:Threaded Project for OOSD
- * purpose: This page displays the customer in session's
- * profile information and allows them to edit it
- * date: 2019-04-08
- *
+ * 
  */
 namespace Workshop5.TravelExperts.App {
     public partial class CustomerProfile : System.Web.UI.Page {
        
+        public bool UpdateSuccess { get; set; }        
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack) 
+            if (!IsPostBack)
             {
-                //disabling validation
-                RequiredFieldValidator8.Enabled = false;
-                RequiredFieldValidator4.Enabled = false;
-                RequiredFieldValidator1.Enabled = false;
-                RequiredFieldValidator2.Enabled = false;
-                RequiredFieldValidator5.Enabled = false;
-                RequiredFieldValidator6.Enabled = false;
-                RequiredFieldValidator7.Enabled = false;
-                RequiredFieldValidator11.Enabled = false;
-                RequiredFieldValidator3.Enabled = false;
+                ////need to find customer information based on who is in the session and display it. 
 
-                // Grab Customer session if user logged in and display it in the text boxes
+                // Grab Customer session if user logged in
                 if (Session["Customer"] != null)
                 {
                     Customer cust = (Customer)Session["Customer"];
@@ -57,7 +45,7 @@ namespace Workshop5.TravelExperts.App {
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            //grabbing customer in sesion and taking cuurent text in boxes and saving whatever was changed in the DB
+ 
             Customer oldCust = (Customer)Session["Customer"];
             try
             {
@@ -76,14 +64,11 @@ namespace Workshop5.TravelExperts.App {
                 newCust.UserName = txtUsername.Text;
                 newCust.Password = txtPassword.Text;
 
-                if (CustomerDB.UpdateCust(oldCust,newCust))
-                {
-                    throw new Exception("Update Success");
-                } else
-                {
-                    throw new Exception("Update Failed");
+                if (CustomerDB.UpdateCust(oldCust,newCust)) {
+                    UpdateSuccess = true;
+                } else {
+                    UpdateSuccess = false;
                 }
-                        
             }
             catch (Exception ex)
             {              
@@ -95,7 +80,6 @@ namespace Workshop5.TravelExperts.App {
         {
             btnSave.Visible = true; //when we hit the edit btn the save btn becombes visable
 
-            //when edit btn is clicked you are able to edit the info inside the text boxes
             txtFirstName.ReadOnly = false;
             txtLastName.ReadOnly = false;
             txtAddress.ReadOnly = false;
@@ -108,17 +92,7 @@ namespace Workshop5.TravelExperts.App {
             txtEmail.Enabled = true; 
             txtUsername.ReadOnly = false;
             txtPassword.ReadOnly = false;
-
-            //re-enabling validation
-            RequiredFieldValidator8.Enabled = true;
-            RequiredFieldValidator4.Enabled = true;
-            RequiredFieldValidator1.Enabled = true;
-            RequiredFieldValidator2.Enabled = true;
-            RequiredFieldValidator5.Enabled = true;
-            RequiredFieldValidator6.Enabled = true;
-            RequiredFieldValidator7.Enabled = true;
-            RequiredFieldValidator11.Enabled = true;
-            RequiredFieldValidator3.Enabled = true;
+            txtConfirm.ReadOnly = false;
         }
     }
 }

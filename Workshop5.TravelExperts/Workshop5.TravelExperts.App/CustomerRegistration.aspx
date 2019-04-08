@@ -15,8 +15,8 @@
     <br />
     <br />
 
-    <div class="customerRegistrationForm" >
-        <div class="container">
+    <div class="customerRegistrationForm" style="background-color:lightskyblue; border-radius:5px">
+        <div class="container" >
             <div class="form-box">
                 <div>
                     <label>Username</label>
@@ -32,7 +32,7 @@
                     <label>Password</label>
                 </div>
                 <div class="txt-wrapper">
-                    <asp:TextBox ID="uxPassword" runat="server" CssClass="txtbox"></asp:TextBox>
+                    <asp:TextBox ID="uxPassword" runat="server" CssClass="txtbox" TextMode="Password"></asp:TextBox>
                 </div>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="uxPassword" ErrorMessage="RequiredFieldValidator" ForeColor="Red">Password is required to be filled!</asp:RequiredFieldValidator>
             </div>
@@ -42,7 +42,7 @@
                     <label>Confirm password</label>
                 </div>
                 <div class="txt-wrapper">
-                    <asp:TextBox ID="uxConfirm" runat="server" CssClass="txtbox"></asp:TextBox>
+                    <asp:TextBox ID="uxConfirm" runat="server" CssClass="txtbox" TextMode="Password"></asp:TextBox>
                 </div>
                 <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="uxPassword" ErrorMessage="CompareValidator" ForeColor="Red" ControlToValidate="uxConfirm" Display="Dynamic" >Password does not match!</asp:CompareValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="uxConfirm" ErrorMessage="RequiredFieldValidator" ForeColor="Red">Confirm Password is required to be filled!</asp:RequiredFieldValidator>
@@ -162,6 +162,6 @@
             </div>
         </div>
     </div>
-    <asp:Button ID="uxClear" runat="server" Text="Clear" Height="35px" Width="200px" OnClick="uxClear_Click" style="position:relative; left: 300px" CssClass="btnLogin" CausesValidation="false"/>
-    <asp:Button ID="uxSubmit" runat="server" Text="Create an account" Height="35px" Width="200px" OnClick="uxSubmit_Click" CssClass="btnLogin" style="position:relative; left:500px"/>
+    <asp:Button ID="uxClear" runat="server" Text="Clear" Height="35px" Width="200px" OnClick="uxClear_Click" style="position:relative; left: 280px" CssClass="btnLogin" CausesValidation="false"/>
+    <asp:Button ID="uxSubmit" runat="server" Text="Create an account" Height="35px" Width="200px" OnClick="uxSubmit_Click" CssClass="btnLogin" style="position:relative; left:400px"/>
 </asp:Content>
