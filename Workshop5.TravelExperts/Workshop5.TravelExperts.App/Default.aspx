@@ -8,10 +8,12 @@
     <br />
     <br />
     <br />
+    <div style="margin-left:75px">
     <asp:Image ID="Image2" ImageUrl="~/Images/paris.jpg" runat="server" />
     <asp:Image ID="Image3" ImageUrl="~/Images/moscow.jpg" runat="server" />
     <asp:Image ID="Image4" ImageUrl="~/Images/venice.jpg" runat="server" />
     <asp:Image ID="Image5" ImageUrl="~/Images/coliseum.jpg" runat="server" />
+     </div>
     <br />
     <br />
     <br />
