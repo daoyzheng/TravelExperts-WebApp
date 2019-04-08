@@ -92,6 +92,7 @@ namespace Workshop5.TravelExperts.App {
             txtEmail.Enabled = true; 
             txtUsername.ReadOnly = false;
             txtPassword.ReadOnly = false;
+            txtConfirm.ReadOnly = false;
         }
     }
 }
