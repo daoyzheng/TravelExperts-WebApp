@@ -1,10 +1,19 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CustomerProfile.aspx.cs" Inherits="Workshop5.TravelExperts.App.CustomerProfile" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-       <br />
-    <h3 style="color:blue">Customer Profile </h3>
-    <br />
-    <br />
+    <h3 style="color:blue; text-align:center">Customer Profile </h3>
+
+    <%if (btnSaveClicked && UpdateSuccess) {%>
+        <div style="position:relative; background-color:lightgreen; width:300px; left:50%; margin-left: -150px; text-align:center; height:40px; border-radius: 5px">
+            <asp:Label style="display:inline-block; margin-top:10px" runat="server">Update Success</asp:Label>
+        </div>
+    <%} %>
+
+    <%if (btnSaveClicked && !UpdateSuccess) {%>
+        <div style="position:relative; background-color:lightsalmon; width:300px; left:50%; margin-left: -150px; text-align:center; height:40px; border-radius: 5px">
+            <asp:Label style="display:inline-block; margin-top:10px" runat="server">Update Failed</asp:Label>
+        </div>
+    <%} %>
 
     <div class="customerRegistrationForm" style="background-color:lightskyblue; border-radius:5px">
         <div class="container">
@@ -153,7 +162,7 @@
             </div>
         </div>
     </div>
-
+ <asp:Button ID="btnReset" runat="server" Text="Reset" Visible="false" Height="35px" Width="150px" OnClick="btnReset_Click" style="position:relative; left: 280px" CausesValidation="false" CssClass="btnLogin"/>
  <asp:Button ID="btnEdit" runat="server" Text="Edit" Height="35px" Width="150px" OnClick="btnEdit_Click" style="position:relative; left: 280px" CausesValidation="false" CssClass="btnLogin"/>
  <asp:Button ID="btnSave" runat="server" Text="Save" Height="35px" Width="150px"  OnClick="btnSave_Click" style="position:relative; left: 480px" Visible="False" CssClass="btnLogin"/>
 
