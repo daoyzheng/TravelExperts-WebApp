@@ -16,7 +16,7 @@
     <br />
 
     <div class="customerRegistrationForm" >
-        <div class="container">
+        <div class="container" style="background-color:lightskyblue; border-radius:5px">
             <div class="form-box">
                 <div>
                     <label>Username</label>
@@ -79,7 +79,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container" style="background-color:lightskyblue; border-radius:5px">
             <div class="form-box">
                 <div>
                     <label>City</label>

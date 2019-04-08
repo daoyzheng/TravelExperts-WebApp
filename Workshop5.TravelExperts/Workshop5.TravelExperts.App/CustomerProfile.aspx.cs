@@ -15,20 +15,11 @@ using Workshop5.TravelExperts.Domain;
 namespace Workshop5.TravelExperts.App {
     public partial class CustomerProfile : System.Web.UI.Page {
        
+        public bool UpdateSuccess { get; set; }        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                RequiredFieldValidator8.Enabled = false;
-                RequiredFieldValidator4.Enabled = false;
-                RequiredFieldValidator1.Enabled = false;
-                RequiredFieldValidator2.Enabled = false;
-                RequiredFieldValidator5.Enabled = false;
-                RequiredFieldValidator6.Enabled = false;
-                RequiredFieldValidator7.Enabled = false;
-                RequiredFieldValidator11.Enabled = false;
-                RequiredFieldValidator3.Enabled = false;
-
                 ////need to find customer information based on who is in the session and display it. 
 
                 // Grab Customer session if user logged in
@@ -73,14 +64,11 @@ namespace Workshop5.TravelExperts.App {
                 newCust.UserName = txtUsername.Text;
                 newCust.Password = txtPassword.Text;
 
-                if (CustomerDB.UpdateCust(oldCust,newCust))
-                {
-                    throw new Exception("Update Success");
-                } else
-                {
-                    throw new Exception("Update Failed");
+                if (CustomerDB.UpdateCust(oldCust,newCust)) {
+                    UpdateSuccess = true;
+                } else {
+                    UpdateSuccess = false;
                 }
-                        
             }
             catch (Exception ex)
             {              
@@ -104,16 +92,6 @@ namespace Workshop5.TravelExperts.App {
             txtEmail.Enabled = true; 
             txtUsername.ReadOnly = false;
             txtPassword.ReadOnly = false;
-
-            RequiredFieldValidator8.Enabled = true;
-            RequiredFieldValidator4.Enabled = true;
-            RequiredFieldValidator1.Enabled = true;
-            RequiredFieldValidator2.Enabled = true;
-            RequiredFieldValidator5.Enabled = true;
-            RequiredFieldValidator6.Enabled = true;
-            RequiredFieldValidator7.Enabled = true;
-            RequiredFieldValidator11.Enabled = true;
-            RequiredFieldValidator3.Enabled = true;
         }
     }
 }
