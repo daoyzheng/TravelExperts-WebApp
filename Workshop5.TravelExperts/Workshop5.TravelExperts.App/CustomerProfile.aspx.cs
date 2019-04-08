@@ -67,6 +67,7 @@ namespace Workshop5.TravelExperts.App {
                 newCust.Password = txtPassword.Text;
 
                 if (CustomerDB.UpdateCust(oldCust,newCust)) {
+                    Session["Customer"] = newCust;
                     UpdateSuccess = true;
                     btnReset_Click(null, null);
                     btnSaveClicked = true;
