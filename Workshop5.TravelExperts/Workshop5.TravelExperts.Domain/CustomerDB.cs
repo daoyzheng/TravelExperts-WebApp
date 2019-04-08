@@ -203,29 +203,30 @@ namespace Workshop5.TravelExperts.Domain
 
             //finding record it needs to update "old" and replacing it with the "new" customer info
             string update = "UPDATE Customers SET " +
-                                     "custFirstName = @NewcustFirstName, " +
-                                     "custLastName = @NewcustLastName, " +
+                                     "custFirstName = @NewCustFirstName, " +
+                                     "custLastName = @NewCustLastName, " +
                                      "custAddress = @NewCustAddress, " +
                                      "custCity = @NewCustCity, " +
                                      "custProv = @NewCustProv, " +
-                                     "CustCountry = @newCustCountry" +
-                                     "CustHomePhone = @NewCustHomePhone" +
-                                     "CustBusPhone = @NewCustBusPhone" +
-                                     "CustEmail = @NewCustEmail" +
-                                     "UserName = @NewUserName " +
-                                     "Password = @NewPassword" +
-                                     "WHERE custFirstName = @OldcustLastName " + // to identify record to update
-                                     "AND custFirstName = @OldcustLastName " + 
+                                     "CustCountry = @newCustCountry," +
+                                     "CustHomePhone = @NewCustHomePhone, " +
+                                     "CustBusPhone = @NewCustBusPhone, " +
+                                     "CustEmail = @NewCustEmail, " +
+                                     "UserName = @NewUserName, " +
+                                     "Password = @NewPassword " +
+                                     "WHERE CustomerId = @OldCustomerId " +
+                                     "AND custFirstName = @OldCustFirstName " + // to identify record to update
+                                     "AND custLastName = @OldCustLastName " + 
                                      "AND custAddress = @OldCustAddress " +
-                                     "AND custCity = @OldCustCity" +
+                                     "AND custCity = @OldCustCity " +
                                      "AND CustProv = @OldCustProv " +
                                      "AND CustPostal = @OldCustPostal " +
                                      "AND CustCountry = @OldCustCountry " +
-                                     "AND CustHomePhone = @OldCustHomePHone" +
-                                     "AND CustBusPhone = @OldCustBusPhone" +
-                                     "AND CustEmail = @OldCustEmail" +
-                                     "AND UserName = @OldUserName" +
-                                     "AND Password = @OldPassword";
+                                     "AND CustHomePhone = @OldCustHomePhone " +
+                                     "AND CustBusPhone = @OldCustBusPhone " +
+                                     "AND CustEmail = @OldCustEmail " +
+                                     "AND UserName = @OldUserName " +
+                                     "AND Password = @OldPassword ";
                 
             SqlCommand updateCmd = new SqlCommand(update, connection);
             //New 
@@ -244,7 +245,8 @@ namespace Workshop5.TravelExperts.Domain
 
 
             //Old
-            updateCmd.Parameters.AddWithValue("@OldFirstName",oldCust.CustFirstName);
+            updateCmd.Parameters.AddWithValue("@OldCustomerId", oldCust.CustomerId);
+            updateCmd.Parameters.AddWithValue("@OldCustFirstName",oldCust.CustFirstName);
             updateCmd.Parameters.AddWithValue("@OldCustLastName", oldCust.CustLastName);
             updateCmd.Parameters.AddWithValue("@OldCustAddress", oldCust.CustAddress);
             updateCmd.Parameters.AddWithValue("@OldCustCity", oldCust.CustCity);

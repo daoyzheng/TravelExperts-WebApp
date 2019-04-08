@@ -33,7 +33,7 @@ namespace Workshop5.TravelExperts.App
                 //if customer already exist 
                 Customer cust = CustomerDB.Find(uname);
                 Session["Customer"] = cust;
-                Response.Redirect("~/CustomerProfile.aspx");
+                Response.Redirect("~/CustomerOrders.aspx");
                 
             }
             else
