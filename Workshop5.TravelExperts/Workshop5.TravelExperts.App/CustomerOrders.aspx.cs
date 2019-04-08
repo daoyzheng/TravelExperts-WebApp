@@ -69,51 +69,61 @@ namespace Workshop5.TravelExperts.App
                          Total = ((decimal)(bd.BasePrice + bd.AgencyCommission)).ToString("c")
 
                      }).ToList();
-                // iterate through the BookingSummary List to calculate column
-                // totals for Price, Commission and Total
-                decimal totBase = 0.0m;
-                decimal totComm = 0.0m;
-                decimal totTotl = 0.0m;
-                foreach(BookingSummary book in bookSummary)
+
+                bool isEmpty = !bookSummary.Any();
+                if (!isEmpty) // if there are Travel Products execute the following block
                 {
-                    string temp = "";
-                    temp = (book.BBasePrice).Remove(0,1);
-                    totBase += decimal.Parse(temp);
-                    temp = (book.BAgencyCommission).Remove(0, 1);
-                    totComm += decimal.Parse(temp);
-                    temp = (book.Total).Remove(0, 1);
-                    totTotl += decimal.Parse(temp);
+                    bookS = true;
+
+                    // iterate through the BookingSummary List to calculate column
+                    // totals for Price, Commission and Total
+                    decimal totBase1 = 0.0m;
+                    decimal totComm1 = 0.0m;
+                    decimal totTotl1 = 0.0m;
+                    foreach (BookingSummary book in bookSummary)
+                    {
+                        string temp = "";
+                        temp = (book.BBasePrice).Remove(0, 1);
+                        totBase1 += decimal.Parse(temp);
+                        temp = (book.BAgencyCommission).Remove(0, 1);
+                        totComm1 += decimal.Parse(temp);
+                        temp = (book.Total).Remove(0, 1);
+                        totTotl1 += decimal.Parse(temp);
+                    }
+
+                    //                List<BookingSummary> newList = bookSummary.OrderBy(b => b.BookingDate).ToList();
+                    List<BookingSummary> newList = bookSummary.OrderByDescending(b => b.BookingDate).ToList();
+
+                    // Concoct dummy BookingSummary Record for last Totals line in table
+                    BookingSummary book1 = new BookingSummary();
+                    book1.BookingNo = "";
+                    book1.BookingDate = "";
+                    book1.Description = "";
+                    book1.TripStartDate = "";
+                    book1.TripEndDate = "Totals";
+                    book1.BBasePrice = totBase1.ToString("c");
+                    book1.BAgencyCommission = totComm1.ToString("c");
+                    book1.Total = totTotl1.ToString("c");
+
+                    newList.Add(book1);
+
+                    gvwTravelData.DataSource = newList;
+
+
+                    gvwTravelData.DataBind();
+
+                    //                gvwTravelData.HeaderRow.Cells[0].HorizontalAlign = HorizontalAlign.Center;
+
+                    int rowCount = gvwTravelData.Rows.Count;
+                    //                gvwTravelData.Rows[rowCount - 1].Cells[3].;
+
+                    gvwTravelData.Rows[rowCount - 1].Cells[4].Font.Bold = true;
+                    gvwTravelData.Rows[rowCount - 1].Cells[5].Font.Bold = true;
+                    gvwTravelData.Rows[rowCount - 1].Cells[6].Font.Bold = true;
+                    gvwTravelData.Rows[rowCount - 1].Cells[7].Font.Bold = true;
+
+                    gvwTravelData.HeaderRow.HorizontalAlign = HorizontalAlign.Center;
                 }
-                // Concoct dummy BookingSummary Record for last Totals line in table
-                BookingSummary book1 = new BookingSummary();
-                book1.BookingNo = "";
-                book1.BookingDate = "";
-                book1.Description = "";
-                book1.TripStartDate = "";
-                book1.TripEndDate = "Totals";
-                book1.BBasePrice = totBase.ToString("c");
-                book1.BAgencyCommission = totComm.ToString("c");
-                book1.Total = totTotl.ToString("c");
-
-                bookSummary.Add(book1);
-
-                gvwTravelData.DataSource = bookSummary;
-
- 
-                gvwTravelData.DataBind();
-
-//                gvwTravelData.HeaderRow.Cells[0].HorizontalAlign = HorizontalAlign.Center;
-
-                int rowCount = gvwTravelData.Rows.Count;
-//                gvwTravelData.Rows[rowCount - 1].Cells[3].;
-
-                gvwTravelData.Rows[rowCount - 1].Cells[4].Font.Bold = true;
-                gvwTravelData.Rows[rowCount - 1].Cells[5].Font.Bold = true;
-                gvwTravelData.Rows[rowCount - 1].Cells[6].Font.Bold = true;
-                gvwTravelData.Rows[rowCount - 1].Cells[7].Font.Bold = true;
-
-                gvwTravelData.HeaderRow.HorizontalAlign = HorizontalAlign.Center;
-
                 // Two table LINQ join to extract relevant Fields.
                 //List<PackageSummary> packSummary =
                 //    (from b in bookings
@@ -147,14 +157,16 @@ namespace Workshop5.TravelExperts.App
                          Total = ((decimal)(p.PkgBasePrice + p.PkgAgencyCommission)).ToString("c")
                      }).ToList();
 
-                bool isEmpty = !packSummary.Any();
+                isEmpty = !packSummary.Any();
                 if (isEmpty) return;
+
+                packS = true;
 
                 // iterate through the BookingSummary List to calculate column
                 // totals for Price, Commission and Total
-                totBase = 0.0m;
-                totComm = 0.0m;
-                totTotl = 0.0m;
+                decimal totBase = 0.0m;
+                decimal totComm = 0.0m;
+                decimal totTotl = 0.0m;
                 foreach (BookingSummary pack in packSummary)
                 {
                     string temp = "";
@@ -185,12 +197,12 @@ namespace Workshop5.TravelExperts.App
 
                 gvwTravelData1.DataBind();
 
-                rowCount = gvwTravelData1.Rows.Count;
+                int rowCount1 = gvwTravelData1.Rows.Count;
 
-                gvwTravelData1.Rows[rowCount - 1].Cells[4].Font.Bold = true;
-                gvwTravelData1.Rows[rowCount - 1].Cells[5].Font.Bold = true;
-                gvwTravelData1.Rows[rowCount - 1].Cells[6].Font.Bold = true;
-                gvwTravelData1.Rows[rowCount - 1].Cells[7].Font.Bold = true;
+                gvwTravelData1.Rows[rowCount1 - 1].Cells[4].Font.Bold = true;
+                gvwTravelData1.Rows[rowCount1 - 1].Cells[5].Font.Bold = true;
+                gvwTravelData1.Rows[rowCount1 - 1].Cells[6].Font.Bold = true;
+                gvwTravelData1.Rows[rowCount1 - 1].Cells[7].Font.Bold = true;
             }
         }
 
@@ -215,7 +227,7 @@ namespace Workshop5.TravelExperts.App
                 gvr.Cells[3].Text = "Trip Start";
                 gvr.Cells[4].Text = "Trip End";
                 gvr.Cells[5].Text = "Base Price";
-                gvr.Cells[6].Text = "Commission";
+                gvr.Cells[6].Text = "Charges";
                 gvr.Cells[7].Text = "Line Total";
 
             }
@@ -243,7 +255,7 @@ namespace Workshop5.TravelExperts.App
                 gvr.Cells[3].Text = "Trip Start";
                 gvr.Cells[4].Text = "Trip End";
                 gvr.Cells[5].Text = "Base Price";
-                gvr.Cells[6].Text = "Commission";
+                gvr.Cells[6].Text = "Charges";
                 gvr.Cells[7].Text = "Line Total";
 
                 //gvr.Cells[0].Text = "Package Id";

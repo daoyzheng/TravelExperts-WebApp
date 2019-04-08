@@ -8,14 +8,21 @@
 
     <div class="row">
         <div style ="width:100%; margin:50px">
-            <h4><%=custName%>, here is your Travel Product Summary:</h4>
+            <% if (bookS == true)
+                {%>
+                <h4><%=custName%>, here is your Travel Product Summary:</h4>
+                <%} %>
+            <%else { %>
+                <h4><%=custName%>, you have no Travel Products, Yet!:</h4>
+            <%} %>
+
             <table style="width:100%; text-align:center">
               <tr>
                   <th style ="text-align:center"></th>
               </tr>
               <tr>
                   <td style="width:100%; text-align:center">
-                      <asp:GridView ID="gvwTravelData" runat="server" HeaderStyle-CssClass="text-center"  CellPadding  ="20" ForeColor="#333333" GridLines="Vertical" HorizontalAlign="Center" Width="100%" OnRowCreated="gvwTravelData_RowCreated" >
+                      <asp:GridView ID="gvwTravelData" runat="server" HeaderStyle-CssClass="text-center"  CellPadding  ="20" ForeColor="#333333" GridLines="Vertical" HorizontalAlign="Center" Width="100%" OnRowCreated="gvwTravelData_RowCreated" AllowSorting="True" >
                          <%--<Columns>
                               <asp:BoundField HeaderStyle-HorizontalAlign="Center" />
                           </Columns>--%>
@@ -36,18 +43,18 @@
               </tr>
             </table>
 
-            <div>
+            <div style="width:100%">
             <% if (packS == true)
                 {%>
                 <h4><%=custName%>, here is your Travel Package Summary:</h4>
                 <%} %>
-            <table>
+            <table style="width:100%">
               <tr>
                   <th style="text-align:center"></th>
               </tr>               
                   <tr>
                   <td>
-                      <asp:GridView ID="gvwTravelData1" runat="server" Width="1080px" CellPadding="4" ForeColor="#333333" GridLines="Vertical" OnRowCreated="gvwTravelData1_RowCreated">
+                      <asp:GridView ID="gvwTravelData1" runat="server" Width="100%" CellPadding="4" ForeColor="#333333" GridLines="Vertical" OnRowCreated="gvwTravelData1_RowCreated">
                           <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                           <EditRowStyle BackColor="#999999" />
                           <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
