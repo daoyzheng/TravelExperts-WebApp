@@ -157,7 +157,7 @@
                     <label>Email</label>
                 </div>
                 <div class="txt-wrapper">
-                    <asp:TextBox ID="uxEmail" runat="server" CssClass="txtbox"></asp:TextBox>
+                    <asp:TextBox ID="uxEmail" runat="server" CssClass="txtbox" TextMode="Email"></asp:TextBox>
                 </div>
             </div>
         </div>
