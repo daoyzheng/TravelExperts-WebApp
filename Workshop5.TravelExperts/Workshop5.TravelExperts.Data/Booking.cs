@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Workshop5.TravelExperts.Data
 {
-    public class Booking
+    public class Booking : IComparable
     {
         public int BookingId { get; set; }
         public DateTime? BookingDate { get; set; }
@@ -28,5 +28,9 @@ namespace Workshop5.TravelExperts.Data
         public string TripTypeId { get; set; }
         public int? PackageId { get; set; }
 
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

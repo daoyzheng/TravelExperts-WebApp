@@ -16,8 +16,11 @@ namespace Workshop5.TravelExperts.App {
     public partial class CustomerProfile : System.Web.UI.Page {
        
         public bool UpdateSuccess { get; set; }        
+        public bool btnSaveClicked { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnSaveClicked = false;
             if (!IsPostBack)
             {
                 ////need to find customer information based on who is in the session and display it. 
@@ -40,7 +43,6 @@ namespace Workshop5.TravelExperts.App {
                     txtEmail.Text = cust.CustEmail.ToString();
                 }
             }
-            
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -65,9 +67,13 @@ namespace Workshop5.TravelExperts.App {
                 newCust.Password = txtPassword.Text;
 
                 if (CustomerDB.UpdateCust(oldCust,newCust)) {
+                    Session["Customer"] = newCust;
                     UpdateSuccess = true;
+                    btnReset_Click(null, null);
+                    btnSaveClicked = true;
                 } else {
                     UpdateSuccess = false;
+                    btnSaveClicked = true;
                 }
             }
             catch (Exception ex)
@@ -78,7 +84,10 @@ namespace Workshop5.TravelExperts.App {
 
         protected void btnEdit_Click(object sender, EventArgs e)
         {
+            btnSaveClicked = false;
             btnSave.Visible = true; //when we hit the edit btn the save btn becombes visable
+            btnReset.Visible = true;
+            btnEdit.Visible = false;
 
             txtFirstName.ReadOnly = false;
             txtLastName.ReadOnly = false;
@@ -89,10 +98,45 @@ namespace Workshop5.TravelExperts.App {
             txtCountry.ReadOnly = false;
             txtHomePhone.ReadOnly = false;
             txtBusPhone.ReadOnly = false;
-            txtEmail.Enabled = true; 
+            txtEmail.ReadOnly = false; 
             txtUsername.ReadOnly = false;
             txtPassword.ReadOnly = false;
             txtConfirm.ReadOnly = false;
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e) {
+            btnSaveClicked = false;
+            btnEdit.Visible = true;
+            btnSave.Visible = false;
+            btnReset.Visible = false;
+
+            Customer cust = (Customer)Session["Customer"];
+            txtUsername.Text = cust.UserName.ToString();
+            txtPassword.Text = cust.Password.ToString();
+            txtFirstName.Text = cust.CustFirstName.ToString();
+            txtLastName.Text = cust.CustLastName.ToString();
+            txtAddress.Text = cust.CustAddress.ToString();
+            txtCity.Text = cust.CustCity.ToString();
+            DropDownList1.Text = cust.CustProv.ToString();
+            txtPostal.Text = cust.CustPostal.ToString();
+            txtCountry.Text = cust.CustCountry.ToString();
+            txtHomePhone.Text = cust.CustHomePhone.ToString();
+            txtBusPhone.Text = cust.CustBusPhone.ToString();
+            txtEmail.Text = cust.CustEmail.ToString();
+
+            txtFirstName.ReadOnly = true;
+            txtLastName.ReadOnly = true;
+            txtAddress.ReadOnly = true;
+            txtCity.ReadOnly = true;
+            DropDownList1.Enabled = false;//province
+            txtPostal.ReadOnly = true;
+            txtCountry.ReadOnly = true;
+            txtHomePhone.ReadOnly = true;
+            txtBusPhone.ReadOnly = true;
+            txtEmail.ReadOnly = true; 
+            txtUsername.ReadOnly = true;
+            txtPassword.ReadOnly = true;
+            txtConfirm.ReadOnly = true;
         }
     }
 }

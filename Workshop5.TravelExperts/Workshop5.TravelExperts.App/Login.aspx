@@ -6,7 +6,7 @@
     * Date : April 03,2019
     * Course Name : Threaded Project for OOSD
     * Module : PROJ-207-OOSD
-    * Purpose :Login page
+    * Purpose : Login page
     */--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div style="position:relative;">

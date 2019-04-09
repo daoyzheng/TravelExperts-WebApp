@@ -108,6 +108,7 @@
                         <asp:ListItem Value="QC">Quebec</asp:ListItem>
                         <asp:ListItem Value="SK">Saskatchewan</asp:ListItem>
                     </asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="DropDownList1" ErrorMessage="RequiredFieldValidator" ForeColor="Red" InitialValue="0">Province is required to be filled!</asp:RequiredFieldValidator>
                 </div>
             </div>
 
@@ -157,7 +158,7 @@
                     <label>Email</label>
                 </div>
                 <div class="txt-wrapper">
-                    <asp:TextBox ID="uxEmail" runat="server" CssClass="txtbox"></asp:TextBox>
+                    <asp:TextBox ID="uxEmail" runat="server" CssClass="txtbox" TextMode="Email"></asp:TextBox>
                 </div>
             </div>
         </div>

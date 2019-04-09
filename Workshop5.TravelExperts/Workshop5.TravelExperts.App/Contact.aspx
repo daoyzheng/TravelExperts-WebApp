@@ -24,10 +24,10 @@
    
 <br />
 <br />
-    <asp:Image ID="Image1" ImageUrl="~/Images/contact.jpg" runat="server" />
-<h3 style="color:blue">Main office :</h3>
+    <asp:Image ID="Image1" ImageUrl="~/Images/contact.jpg" runat="server" style="margin-left:50px"/>
+<h3 style="color:blue; margin-left:50px">Main office :</h3>
 <br />
-<p style="color:#072176">
+<p style="color:#072176; margin-left:50px">
     608 9 ST, SW <br />
     Calgary, AB <br />
     T2P 2P3 <br /><br />
@@ -37,9 +37,9 @@
     Fax : (403)500 1020<br />             
 </p>
         
-<h3 style="color:blue">Agents information:</h3><br />
+<h3 style="color:blue;  margin-left:50px">Agents information:</h3><br />
         
-<p style="color:#072176">
+<p style="color:#072176;  margin-left:50px">
 Blinda Thompson<br />   
 Tel:(403)500 8011<br />  
 Email:<a href="mailto:Blinda@Travelexperts.com">Blinda@Travelexperts.com</a>   
