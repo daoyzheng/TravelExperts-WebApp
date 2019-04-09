@@ -46,7 +46,10 @@ namespace Workshop5.TravelExperts.Domain
                     else
                         booking.BookingDate = (DateTime)dr["BookingDate"];
 
-                    booking.BookingNo = (string)dr["BookingNo"];
+                    if (dr["BookingNo"] == DBNull.Value)
+                        booking.BookingNo = null;
+                    else
+                        booking.BookingNo = (string)(dr["BookingNo"]);
 
                     if (dr["TravelerCount"] == DBNull.Value)
                         booking.TravelerCount = null;
@@ -58,7 +61,11 @@ namespace Workshop5.TravelExperts.Domain
                     else
                         booking.CustomerId = (int)(dr["CustomerId"]);
 
-                    booking.TripTypeId = (string)dr["TripTypeId"];
+                    if (dr["TripTypeId"] == DBNull.Value)
+                        booking.TripTypeId = null;
+                    else
+                        booking.TripTypeId = (string)(dr["TripTypeId"]);
+
 
                     if (dr["PackageId"] == DBNull.Value)
                         booking.PackageId = null;

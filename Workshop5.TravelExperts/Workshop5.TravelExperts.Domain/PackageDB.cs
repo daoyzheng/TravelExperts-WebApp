@@ -56,7 +56,11 @@ namespace Workshop5.TravelExperts.Domain
                     else 
                         package.PkgDesc = (string)dr["PkgDesc"];
 
-                    package.PkgBasePrice = (decimal)dr["PkgBasePrice"];
+
+                    if (dr["PkgBasePrice"] == DBNull.Value)
+                        package.PkgBasePrice = null;
+                    else
+                        package.PkgBasePrice = (decimal)dr["PkgBasePrice"];
 
                     if (dr["PkgAgencyCommission"] == DBNull.Value)
                         package.PkgAgencyCommission = null;

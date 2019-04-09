@@ -55,9 +55,15 @@ namespace Workshop5.TravelExperts.Domain
                     else
                         bookingDetail.TripEnd = (DateTime)dr["TripEnd"];
 
-                    bookingDetail.Description = (string)dr["Description"];
+                    if (dr["Description"] == DBNull.Value)
+                        bookingDetail.Description = null;
+                    else
+                        bookingDetail.Description = (string)dr["Description"];
 
-                    bookingDetail.Destination = (string)dr["Destination"];
+                    if (dr["Destination"] == DBNull.Value)
+                        bookingDetail.Destination = null;
+                    else
+                        bookingDetail.Destination = (string)dr["Destination"];
 
                     if (dr["BasePrice"] == DBNull.Value)
                         bookingDetail.BasePrice = null;
