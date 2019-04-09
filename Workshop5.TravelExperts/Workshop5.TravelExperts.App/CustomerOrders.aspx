@@ -13,7 +13,7 @@
                 <h4><%=custName%>, here is your Travel Product Summary:</h4>
                 <%} %>
             <%else { %>
-                <h4><%=custName%>, you have no Travel Products, Yet!:</h4>
+                <h4><%=custName%>, you have no Travel Products, Yet!</h4>
             <%} %>
 
             <table style="width:100%; text-align:center">
