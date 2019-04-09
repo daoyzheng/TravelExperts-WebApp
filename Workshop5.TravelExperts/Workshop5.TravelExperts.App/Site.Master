@@ -99,10 +99,9 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p style="color:purple">&copy; <%: DateTime.Now.Year %> Dao,Hayley,Mahda,Tim</p>
+                <p style="color:purple">&copy; <%: DateTime.Now.Year %>Travel Experts</p>
             </footer>
         </div>
-
     </form>
 </body>
 </html>
