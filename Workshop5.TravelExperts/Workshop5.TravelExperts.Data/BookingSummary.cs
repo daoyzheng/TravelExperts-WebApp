@@ -4,7 +4,7 @@
 * Date: April 5, 2019.
 * Course: CPRG 207 Rapid OOSD Threaded Project
 * Assignment: Workshop 5
-* Purpose: This is a Booking class definition and forms part of the CPRG 207
+* Purpose: This is a BookingSummary class definition and forms part of the CPRG 207
 * Threaded Project Workshop 5.
 *
 *********************************************************************************/
@@ -20,9 +20,6 @@ namespace Workshop5.TravelExperts.Data
 {
     public class BookingSummary
     {
-        //public int? CustomerId { get; set; }
-        //public string CustName { get; set; }
-
         public string BookingNo { get; set; }
         public string BookingDate { get; set; }
         public string Description { get; set; }

@@ -4,7 +4,7 @@
 * Date: April 5, 2019.
 * Course: CPRG 207 Rapid OOSD Threaded Project
 * Assignment: Workshop 5
-* Purpose: This is a Package Summary class definition and forms part of the
+* Purpose: This is a PackageSummary class definition and forms part of the
 * CPRG 207 Threaded Project Workshop 5.
 *
 *********************************************************************************/

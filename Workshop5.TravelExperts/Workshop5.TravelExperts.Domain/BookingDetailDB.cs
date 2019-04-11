@@ -20,6 +20,8 @@ namespace Workshop5.TravelExperts.Domain
 {
     public class BookingDetailDB
     {
+
+        // returns a List of BookingDetail objects from the database
         public static List<BookingDetail> GetAllBookingDetails()
         {
             List<BookingDetail> bookingDetails = new List<BookingDetail>(); // instantiate an empty List of Bookings
@@ -40,6 +42,7 @@ namespace Workshop5.TravelExperts.Domain
                     BookingDetail bookingDetail= new BookingDetail();
                     bookingDetail.BookingDetailId = (int)dr["BookingDetailId"];
 
+                    // if necessary convert DB null values to C# nulls
                     if (dr["ItineraryNo"] == DBNull.Value)
                         bookingDetail.ItineraryNo = null;
                     else

@@ -4,7 +4,8 @@
 * Date: April 5, 2019.
 * Course: CPRG 207 Rapid OOSD Threaded Project
 * Assignment: Workshop 5
-* Purpose: This is a Package database class definition and forms part of the
+* Purpose: This is a  collection of methods to manage Package entities and
+* interact with the database.  It forms part of the
 * CPRG 207 Threaded Project Workshop 5.
 *
 *********************************************************************************/
@@ -20,6 +21,7 @@ namespace Workshop5.TravelExperts.Domain
 {
     public class PackageDB
     {
+        // return a List of Package objects from the database
         public static List<Package> GetAllPackages()
         {
             List<Package> packages = new List<Package>(); // instantiate an empty List of Bookings
@@ -41,6 +43,7 @@ namespace Workshop5.TravelExperts.Domain
                     package.PackageId = (int)dr["PackageId"];
                     package.PkgName = (string)dr["PkgName"];
 
+                    // if necessary convert database null values to C# nulls
                     if (dr["PkgStartDate"] == DBNull.Value)
                         package.PkgStartDate = null;
                     else
@@ -77,9 +80,7 @@ namespace Workshop5.TravelExperts.Domain
             {
                 conn.Close();
             }
-
             return packages;
-
         }
 
     }

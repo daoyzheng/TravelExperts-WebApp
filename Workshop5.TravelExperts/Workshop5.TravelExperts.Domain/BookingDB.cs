@@ -21,6 +21,7 @@ namespace Workshop5.TravelExperts.Domain
 {
     public class BookingDB
     {
+        // returns a List of Booking objects from the database
         public static List<Booking> GetAllBookings()
         {
             List<Booking> bookings = new List<Booking>(); // instantiate an empty List of Bookings
@@ -42,6 +43,7 @@ namespace Workshop5.TravelExperts.Domain
 
                     booking.BookingId = (int)dr["BookingId"];
 
+                    // convert Db null values to C# nulls
                     if (dr["BookingDate"] == DBNull.Value)
                         booking.BookingDate = null;
                     else
