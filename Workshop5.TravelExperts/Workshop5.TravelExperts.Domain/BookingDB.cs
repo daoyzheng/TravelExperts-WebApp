@@ -43,7 +43,7 @@ namespace Workshop5.TravelExperts.Domain
 
                     booking.BookingId = (int)dr["BookingId"];
 
-                    // convert Db null values to C# nulls
+                    // convert DB null values to C# nulls
                     if (dr["BookingDate"] == DBNull.Value)
                         booking.BookingDate = null;
                     else

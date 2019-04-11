@@ -4,7 +4,7 @@
 * Date: April 5, 2019.
 * Course: CPRG 207 Rapid OOSD Threaded Project
 * Assignment: Workshop 5
-* Purpose: This is a  collection of methods to manage Package entities and
+* Purpose: This is a collection of methods to manage Package entities and
 * interact with the database.  It forms part of the
 * CPRG 207 Threaded Project Workshop 5.
 *
@@ -43,7 +43,7 @@ namespace Workshop5.TravelExperts.Domain
                     package.PackageId = (int)dr["PackageId"];
                     package.PkgName = (string)dr["PkgName"];
 
-                    // if necessary convert database null values to C# nulls
+                    // if necessary, convert database null values to C# nulls
                     if (dr["PkgStartDate"] == DBNull.Value)
                         package.PkgStartDate = null;
                     else
@@ -82,6 +82,5 @@ namespace Workshop5.TravelExperts.Domain
             }
             return packages;
         }
-
     }
 }
