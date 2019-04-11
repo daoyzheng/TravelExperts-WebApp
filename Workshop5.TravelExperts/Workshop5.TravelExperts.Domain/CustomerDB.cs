@@ -67,7 +67,7 @@ namespace Workshop5.TravelExperts.Domain
         }//end of AddCustomer class
 
 
-        //function to check username to make sure it is uniqe
+        //function to check username to make sure it is unique
         public static bool CheckUserName(string username)
         {
             int verify;

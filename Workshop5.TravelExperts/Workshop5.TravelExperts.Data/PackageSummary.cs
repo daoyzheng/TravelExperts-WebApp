@@ -2,10 +2,10 @@
 * 
 * Author: Tim Leslie
 * Date: April 5, 2019.
-* Course: CPRG 217 Rapid OOSD Threaded Project
+* Course: CPRG 207 Rapid OOSD Threaded Project
 * Assignment: Workshop 5
 * Purpose: This is a Package Summary class definition and forms part of the
-* CPRG 217 Threaded Project Workshop 5.
+* CPRG 207 Threaded Project Workshop 5.
 *
 *********************************************************************************/
 using System;

@@ -2,10 +2,10 @@
 * 
 * Author: Tim Leslie
 * Date: April 5, 2019.
-* Course: CPRG 217 Rapid OOSD Threaded Project
+* Course: CPRG 207 Rapid OOSD Threaded Project
 * Assignment: Workshop 5
-* Purpose: This is a Package database class definition and forms part of the CPRG 214
-* Threaded Project Workshop 5.
+* Purpose: This is a Package database class definition and forms part of the
+* CPRG 207 Threaded Project Workshop 5.
 *
 *********************************************************************************/
 using System;
@@ -55,7 +55,6 @@ namespace Workshop5.TravelExperts.Domain
                         package.PkgDesc = null;
                     else 
                         package.PkgDesc = (string)dr["PkgDesc"];
-
 
                     if (dr["PkgBasePrice"] == DBNull.Value)
                         package.PkgBasePrice = null;

@@ -1,6 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CustomerOrders.aspx.cs" Inherits="Workshop5.TravelExperts.App.CustomerOrders" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
+<%/********************************************************************************
+* 
+* Author: Tim Leslie
+* Date: April 5, 2019.
+* Course: CPRG 207 Rapid OOSD Threaded Project
+* Assignment: Workshop 5
+* Purpose: This is html asp code for the CustomerOrders page.
+*
+*********************************************************************************/
+%>
 <!--    <div class="jumbotron">
         <p class="lead">Welcome to Travel Experts. Thank you for working with us to serve your travel needs.
 

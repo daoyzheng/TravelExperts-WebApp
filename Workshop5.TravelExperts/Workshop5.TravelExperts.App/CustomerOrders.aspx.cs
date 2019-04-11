@@ -2,10 +2,12 @@
 * 
 * Author: Tim Leslie
 * Date: April 5, 2019.
-* Course: CPRG 217 Rapid OOSD Threaded Project
+* Course: CPRG 207 Rapid OOSD Threaded Project
 * Assignment: Workshop 5
-* Purpose: This is a Booking class definition and forms part of the CPRG 214
-* Threaded Project Workshop 5.
+* Purpose: This is a collection of methods for the CustomerOrders page and
+* forms part of the CPRG 207 Threaded Project Workshop 5. The form_load
+* method handles the majority of GridView controls which display the 
+* Travel Product and Package orders.
 *
 *********************************************************************************/
 using System;
@@ -22,12 +24,13 @@ namespace Workshop5.TravelExperts.App
 {
     public partial class CustomerOrders : System.Web.UI.Page
     {
-
+        // instantiate Package, Booking and BookingDetail Lists from the TravelExperts database.
         public List<Package> packages = new List<Package>();
         public List<Booking> bookings = new List<Booking>();
         public List<BookingDetail> bookingDetails = new List<BookingDetail>();
         public Customer cust = new Customer();
 
+        // boolean variables to be used as flags for Travel Order display
         public bool bookS = false;
         public bool packS = false;
 
@@ -35,7 +38,8 @@ namespace Workshop5.TravelExperts.App
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // if Session Customer variable is not null then assign it
+            // to a Customer object and set up a Razor variable for customer name.
             if (Session["Customer"] != null)
             {
                 cust = (Customer)Session["Customer"];
@@ -46,18 +50,22 @@ namespace Workshop5.TravelExperts.App
                 Response.Redirect("~/login.aspx");
             }
 
-            if (!IsPostBack)
+            if (!IsPostBack) // on first time page load
             {
+                // populate Package, Booking and BookingDetail Lists from database
                 packages = PackageDB.GetAllPackages();
                 bookings = BookingDB.GetAllBookings();
                 bookingDetails = BookingDetailDB.GetAllBookingDetails();
 
-                // Two table LINQ join to extract relevant Fields.
+                // Two table LINQ join to extract relevant Fields for display in the
+                // Customer Orders table. This selection is customizable depending on
+                // what the clients would like to have displayed in the Customer Orders
+                // table. Fields are stored in BookingSummary objects.
                 List<BookingSummary> bookSummary =
                     (from b in bookings
                      join bd in bookingDetails on b.BookingId equals bd.BookingId
                      where b.CustomerId == cust.CustomerId
-                     select new BookingSummary
+                     select new BookingSummary // assign the Linq results to a List of BookingSummary objects.
                      {
                          BookingNo = b.BookingNo,
                          BookingDate = ((DateTime)(b.BookingDate)).ToString("d"),
@@ -71,7 +79,7 @@ namespace Workshop5.TravelExperts.App
                      }).ToList();
 
                 bool isEmpty = !bookSummary.Any();
-                if (!isEmpty) // if there are Travel Products execute the following block
+                if (!isEmpty) // if there are Travel Products, execute the following block
                 {
                     bookS = true;
 
@@ -80,21 +88,20 @@ namespace Workshop5.TravelExperts.App
                     decimal totBase1 = 0.0m;
                     decimal totComm1 = 0.0m;
                     decimal totTotl1 = 0.0m;
-                    foreach (BookingSummary book in bookSummary)
+                    foreach (BookingSummary book in bookSummary) // iterate throught the list to calculate totals
                     {
                         string temp = "";
-                        temp = (book.BBasePrice).Remove(0, 1);
-                        totBase1 += decimal.Parse(temp);
+                        temp = (book.BBasePrice).Remove(0, 1); // remove dollar sign prior to parsing text to decimal
+                        totBase1 += decimal.Parse(temp);        // calculate running total for Base Price
                         temp = (book.BAgencyCommission).Remove(0, 1);
                         totComm1 += decimal.Parse(temp);
                         temp = (book.Total).Remove(0, 1);
                         totTotl1 += decimal.Parse(temp);
                     }
-
-                    //                List<BookingSummary> newList = bookSummary.OrderBy(b => b.BookingDate).ToList();
+                    // sort the BookingSummary List by descending date
                     List<BookingSummary> newList = bookSummary.OrderByDescending(b => b.BookingDate).ToList();
 
-                    // Concoct dummy BookingSummary Record for last Totals line in table
+                    // Build a dummy BookingSummary Record for the last Totals line in the GridView
                     BookingSummary book1 = new BookingSummary();
                     book1.BookingNo = "";
                     book1.BookingDate = "";
@@ -105,18 +112,13 @@ namespace Workshop5.TravelExperts.App
                     book1.BAgencyCommission = totComm1.ToString("c");
                     book1.Total = totTotl1.ToString("c");
 
-                    newList.Add(book1);
+                    newList.Add(book1); // add the Totals line to the List
 
-                    gvwTravelData.DataSource = newList;
-
-
-                    gvwTravelData.DataBind();
-
-                    //                gvwTravelData.HeaderRow.Cells[0].HorizontalAlign = HorizontalAlign.Center;
+                    gvwTravelData.DataSource = newList; // assign list as data source
+                    gvwTravelData.DataBind(); // bind the GridView data
 
                     int rowCount = gvwTravelData.Rows.Count;
-                    //                gvwTravelData.Rows[rowCount - 1].Cells[3].;
-
+                    // format the Total row
                     gvwTravelData.Rows[rowCount - 1].Cells[4].Font.Bold = true;
                     gvwTravelData.Rows[rowCount - 1].Cells[5].Font.Bold = true;
                     gvwTravelData.Rows[rowCount - 1].Cells[6].Font.Bold = true;
@@ -124,23 +126,9 @@ namespace Workshop5.TravelExperts.App
 
                     gvwTravelData.HeaderRow.HorizontalAlign = HorizontalAlign.Center;
                 }
-                // Two table LINQ join to extract relevant Fields.
-                //List<PackageSummary> packSummary =
-                //    (from b in bookings
-                //     join p in packages on b.PackageId equals p.PackageId
-                //     where b.CustomerId == cust.CustomerId
-                //     select new PackageSummary
-                //     {
-                //         PackageId = p.PackageId.ToString(),
-                //         PkgName = p.PkgName,
-                //         PkgDescription = p.PkgDesc,
-                //         PkgStartDate = ((DateTime)p.PkgStartDate).ToString("d"),
-                //         PkgEndDate = ((DateTime)p.PkgEndDate).ToString("d"),
-                //         PBasePrice = ((decimal)(p.PkgBasePrice)).ToString("c"),
-                //         PAgencyCommission = ((decimal)(p.PkgAgencyCommission)).ToString("c"),
-                //         Total = ((decimal)(p.PkgBasePrice + p.PkgAgencyCommission)).ToString("c")
-                //     }).ToList();
 
+                // Use a LINQ query to join the Bookings and Packages tables and poulate
+                // a list of BookingSummary objects for Travel Packages.
                 List<BookingSummary> packSummary =
                     (from b in bookings
                      join p in packages on b.PackageId equals p.PackageId
@@ -177,7 +165,7 @@ namespace Workshop5.TravelExperts.App
                     temp = (pack.Total).Remove(0, 1);
                     totTotl += decimal.Parse(temp);
                 }
-                // Concoct dummy BookingSummary Record for last Totals line in table
+                //Build a dummy BookingSummary Record for the last Totals line in the table
                 BookingSummary pack1 = new BookingSummary();
                 pack1.BookingNo = "";
                 pack1.BookingDate = "";
@@ -193,12 +181,11 @@ namespace Workshop5.TravelExperts.App
                 if (packSummary != null)
                     packS = true;
 
-                gvwTravelData1.DataSource = packSummary;
-
-                gvwTravelData1.DataBind();
+                gvwTravelData1.DataSource = packSummary;    // assign Package list to GridView datasource
+                gvwTravelData1.DataBind();                  // bind the GridView data
 
                 int rowCount1 = gvwTravelData1.Rows.Count;
-
+                // format the Totals Row
                 gvwTravelData1.Rows[rowCount1 - 1].Cells[4].Font.Bold = true;
                 gvwTravelData1.Rows[rowCount1 - 1].Cells[5].Font.Bold = true;
                 gvwTravelData1.Rows[rowCount1 - 1].Cells[6].Font.Bold = true;
@@ -206,12 +193,14 @@ namespace Workshop5.TravelExperts.App
             }
         }
 
-
+        // RowCreated event method for the Travel Products GridView
         protected void gvwTravelData_RowCreated(object sender, GridViewRowEventArgs e)
         {
+            // on aRowCreated event, rename and center align the GridView column headers
             GridViewRow gvr = e.Row;
             if (gvr.RowType == DataControlRowType.Header)
             {
+                // horizontal alignment of GridView header - possibly superfluous
                 gvr.Cells[0].HorizontalAlign = HorizontalAlign.Center;
                 gvr.Cells[1].HorizontalAlign = HorizontalAlign.Center;
                 gvr.Cells[2].HorizontalAlign = HorizontalAlign.Center;
@@ -221,6 +210,7 @@ namespace Workshop5.TravelExperts.App
                 gvr.Cells[6].HorizontalAlign = HorizontalAlign.Center;
                 gvr.Cells[7].HorizontalAlign = HorizontalAlign.Center;
 
+                // rename GridView column headers
                 gvr.Cells[0].Text = "Booking Number";
                 gvr.Cells[1].Text = "Booking Date";
                 gvr.Cells[2].Text = "Description";
@@ -229,17 +219,16 @@ namespace Workshop5.TravelExperts.App
                 gvr.Cells[5].Text = "Base Price";
                 gvr.Cells[6].Text = "Charges";
                 gvr.Cells[7].Text = "Line Total";
-
             }
         }
-
+        // RowCreated event method for the Travel Packages GridView
         protected void gvwTravelData1_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            //GridViewRow headerRow = gvwTravelData.HeaderRow;
-            //headerRow.Cells[0].HorizontalAlign = HorizontalAlign.Center;
+            // on aRowCreated event, rename and center align the GridView column headers
             GridViewRow gvr = e.Row;
             if (gvr.RowType == DataControlRowType.Header)
             {
+                // horizontal alignment of GridView header - possibly superfluous
                 gvr.Cells[0].HorizontalAlign = HorizontalAlign.Center;
                 gvr.Cells[1].HorizontalAlign = HorizontalAlign.Center;
                 gvr.Cells[2].HorizontalAlign = HorizontalAlign.Center;
@@ -249,6 +238,7 @@ namespace Workshop5.TravelExperts.App
                 gvr.Cells[6].HorizontalAlign = HorizontalAlign.Center;
                 gvr.Cells[7].HorizontalAlign = HorizontalAlign.Center;
 
+                // rename GridView column headers
                 gvr.Cells[0].Text = "Booking Number";
                 gvr.Cells[1].Text = "Booking Date";
                 gvr.Cells[2].Text = "Description";
@@ -257,30 +247,8 @@ namespace Workshop5.TravelExperts.App
                 gvr.Cells[5].Text = "Base Price";
                 gvr.Cells[6].Text = "Charges";
                 gvr.Cells[7].Text = "Line Total";
-
-                //gvr.Cells[0].Text = "Package Id";
-                //gvr.Cells[1].Text = "Package Name";
-                //gvr.Cells[2].Text = "Package Start Date";
-                //gvr.Cells[3].Text = "Package End Date";
-                //gvr.Cells[4].Text = "Package Description";
-                //gvr.Cells[5].Text = "Base Price";
-                //gvr.Cells[6].Text = "Commission";
-                //gvr.Cells[7].Text = "Line Total";
-
-                gvr.Cells[0].HorizontalAlign = HorizontalAlign.Center;
-                gvr.Cells[1].HorizontalAlign = HorizontalAlign.Center;
-                gvr.Cells[2].HorizontalAlign = HorizontalAlign.Center;
-                gvr.Cells[3].HorizontalAlign = HorizontalAlign.Center;
-                gvr.Cells[4].HorizontalAlign = HorizontalAlign.Center;
-                gvr.Cells[5].HorizontalAlign = HorizontalAlign.Center;
-                gvr.Cells[6].HorizontalAlign = HorizontalAlign.Center;
-                gvr.Cells[7].HorizontalAlign = HorizontalAlign.Center;
-
-
             }
-
         }
-
     }
 }
    

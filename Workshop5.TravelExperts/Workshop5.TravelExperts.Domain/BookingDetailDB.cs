@@ -2,12 +2,12 @@
 * 
 * Author: Tim Leslie
 * Date: April 5, 2019.
-* Course: CPRG 217 Rapid OOSD Threaded Project
+* Course: CPRG 207 Rapid OOSD Threaded Project
 * Assignment: Workshop 5
-* Purpose: This is a Booking class definition and forms part of the CPRG 214
-* Threaded Project Workshop 5.
+* Purpose: This is a collection of methods for managing the BookingDetail database
+* and objects and forms part of the CPRG 207 Threaded Project Workshop 5.
 *
-*********************************************************************************/using System;
+*********************************************************************************/
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -80,10 +80,20 @@ namespace Workshop5.TravelExperts.Domain
                     else
                         bookingDetail.BookingId = (int)dr["BookingId"];
 
+                    if (dr["RegionId"] == DBNull.Value)
+                        bookingDetail.RegionId = null;
+                    else
+                        bookingDetail.RegionId = (string)dr["RegionId"];
 
-                    bookingDetail.RegionId = (string)dr["RegionId"];
-                    bookingDetail.ClassId = (string)dr["ClassId"];
-                    bookingDetail.FeeId = (string)dr["FeeId"];
+                    if (dr["ClassId"] == DBNull.Value)
+                        bookingDetail.ClassId = null;
+                    else
+                        bookingDetail.ClassId = (string)dr["ClassId"];
+
+                    if (dr["FeeId"] == DBNull.Value)
+                        bookingDetail.FeeId = null;
+                    else
+                        bookingDetail.FeeId = (string)dr["FeeId"];
 
                     if (dr["ProductSupplierId"] == DBNull.Value)
                         bookingDetail.ProductSupplierId= null;

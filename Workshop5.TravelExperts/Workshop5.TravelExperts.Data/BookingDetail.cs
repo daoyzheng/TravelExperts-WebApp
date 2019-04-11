@@ -2,12 +2,12 @@
 * 
 * Author: Tim Leslie
 * Date: April 5, 2019.
-* Course: CPRG 217 Rapid OOSD Threaded Project
+* Course: CPRG 207 Rapid OOSD Threaded Project
 * Assignment: Workshop 5
-* Purpose: This is a BookingDetail class definition and forms part of the CPRG 214
+* Purpose: This is a BookingDetail class definition and forms part of the CPRG 207
 * Threaded Project Workshop 5.
 *
-*********************************************************************************/using System;
+*********************************************************************************/
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,6 @@ namespace Workshop5.TravelExperts.Data
         public decimal? BasePrice { get; set; }
         //public string BasePrice { get; set; }     
         public decimal? AgencyCommission { get; set; }
-        //public string AgencyCommission { get; set; }
         public int? BookingId { get; set; }
         public string RegionId { get; set; }
         public string ClassId { get; set; }
