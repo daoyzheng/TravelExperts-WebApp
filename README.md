@@ -1,4 +1,13 @@
-# Workshop-5
+# TravelExpert-Web Application
+- ASP.NET Framework
+- Microsoft Visual Studio
+- Microsoft SQL Server
+- Bootstrap
 
-alter table Customers add UserName varchar(50)
-alter table Customers add Password varchar(50)
+## Team Members
+- [Haley](https://github.com/hmeh)
+- [Mahda](https://github.com/mahdakazemian)
+- [Tim](https://github.com/tdleslie17)
+- [Dao](https://github.com/daoyzheng)
+
+## Overview
